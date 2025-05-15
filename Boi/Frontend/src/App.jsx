@@ -19,189 +19,117 @@ function App() {
       .then((res) => res.json())
       .then((data) => setJsonData(data))
       .catch((error) => {
-        console.error('Failed to load data.json:', error);
+        console.error('Failed to load json.data:', error);
       });
   }, []);
 
   const handleDownloadPDF = () => {
+  try {
     const doc = new jsPDF();
+    let currentY = 20;
+    const pageHeight = 270;
+
+    const checkAndAddPage = () => {
+      if (currentY > pageHeight) {
+        doc.addPage();
+        currentY = 20; 
+      }
+    };
 
     const addTextToPDF = (text, yPosition) => {
       doc.text(text, 10, yPosition);
     };
 
-    const addTableToPDF = (headers, data, startY) => {
-      let currentY = startY;
+    const addSectionHeader = (title) => {
+      doc.setFontSize(12);
+      doc.setFont(undefined, 'bold');
+      addTextToPDF(title, currentY);
+      currentY += 10;
+      doc.setFont(undefined, 'normal');
+    };
 
-      // Adding table headers
-      doc.setFontSize(10);
-      headers.forEach((header, index) => {
-        doc.text(header, 10 + index * 50, currentY);
+    const addListSection = (title, items, displayField = 'shdname') => {
+      if (!Array.isArray(items) || items.length === 0) return;
+      addSectionHeader(title);
+      items.forEach((item, index) => {
+        const value = item[displayField] || 'N/A';
+        addTextToPDF(`${index + 1}. ${value}`, currentY);
+        currentY += 10;
+        checkAndAddPage();
       });
+    };
 
+    const addTableToPDF = (headers, data, title) => {
+      if (!Array.isArray(data) || data.length === 0) return;
+      addSectionHeader(title);
+      doc.setFontSize(10);
+      headers.forEach((header, i) => {
+        doc.text(header, 10 + i * 50, currentY);
+      });
       currentY += 10;
 
-      // Adding table rows
-      data.forEach((row, index) => {
-        row.forEach((cell, cellIndex) => {
-          doc.text(cell, 10 + cellIndex * 50, currentY);
+      data.forEach(row => {
+        checkAndAddPage();
+        row.forEach((cell, i) => {
+          doc.text(String(cell), 10 + i * 50, currentY);
         });
         currentY += 10;
       });
-
-      return currentY;
     };
 
-    let currentY = 20;
-    const pageHeight = 270; // standard A4 size - margin from top and bottom
-
-    // Add title
+    // Title
     doc.setFontSize(16);
     doc.text('Investor Dashboard', 105, currentY, { align: 'center' });
     currentY += 20;
 
-    // Add Investors List
-    addTextToPDF('Investors List:', currentY);
-    currentY += 10;
-    const investors = jsonData.investors;
-    investors.forEach((investor, index) => {
-      addTextToPDF(`${index + 1}. ${investor.name}`, currentY);
-      currentY += 10;
+    // Sections
+    addListSection('Investors List:', jsonData?.investors, 'shdname');
 
-      // Check if we need to add a new page
-      if (currentY > pageHeight) {
-        doc.addPage();
-        currentY = 20;
-      }
-    });
-
-    // Add Project Details
-    addTextToPDF('Project Details:', currentY);
-    currentY += 10;
-    const projects = jsonData.projects;
-    projects.forEach((project, index) => {
-      addTextToPDF(`${index + 1}. ${project.name}`, currentY);
-      currentY += 10;
-
-      if (currentY > pageHeight) {
-        doc.addPage();
-        currentY = 20;
-      }
-    });
-
-    // Add Products Table
-    addTextToPDF('Products:', currentY);
-    currentY += 10;
-    const products = jsonData.products;
-    const productHeaders = ['Product Name'];
-    const productData = products.map((product) => [product.name]);
-    currentY = addTableToPDF(productHeaders, productData, currentY);
-
-    if (currentY > pageHeight) {
-      doc.addPage();
-      currentY = 20;
+    if (jsonData?.projects) {
+      addSectionHeader('Project Details:');
+      addTextToPDF(`Project Type: ${jsonData.projects.projectType || 'N/A'}`, currentY); currentY += 10;
+      addTextToPDF(`Description: ${jsonData.projects.projectDes || 'N/A'}`, currentY); currentY += 10;
     }
 
-    // Add Investment Table
-    addTextToPDF('Investment Details:', currentY);
-    currentY += 10;
-    const investments = jsonData.investment;
-    const investmentHeaders = ['Investor', 'Amount'];
-    const investmentData = investments.map((investment) => [investment.name, investment.amount]);
-    currentY = addTableToPDF(investmentHeaders, investmentData, currentY);
+    addTableToPDF(
+      ['Product / Service'],
+      jsonData?.products?.map(p => [p.prodserv || 'N/A']),
+      'Products'
+    );
 
-    if (currentY > pageHeight) {
-      doc.addPage();
-      currentY = 20;
-    }
+    addTableToPDF(
+      ['Project', 'Year', 'Capital (Foreign)', 'Capital (Local)'],
+      jsonData?.investment?.map(i => [
+        i.project || 'N/A',
+        i.year || 'N/A',
+        i.fcptatofor || 0,
+        i.fcpttoaloc || 0
+      ]),
+      'Investment Details'
+    );
 
-    // Add Proposed Financing
-    addTextToPDF('Proposed Financing:', currentY);
-    currentY += 10;
-    const financing = jsonData.proposedFinancing;
-    financing.forEach((item, index) => {
-      addTextToPDF(`${index + 1}. ${item.name}`, currentY);
-      currentY += 10;
+    // These may not yet exist in JSON
+    addListSection('Proposed Financing:', jsonData?.proposedFinancing, 'item');
+    addListSection('Manpower Stats:', jsonData?.manpower, 'role');
+    addListSection('Remittance Details:', jsonData?.remittances, 'type');
+    addListSection('Implementation Programs:', jsonData?.implementationPrograms, 'program');
+    addListSection('Contact Details:', jsonData?.contacts, 'name');
+    addListSection('Declaration Details:', jsonData?.declarations, 'statement');
+    
+    addListSection('Investment Table:', jsonData?.investment, 'project');
+    addListSection('Investors List:', jsonData?.investors, 'shdname');
+    addListSection('Products Table:', jsonData?.products, 'prodserv');
+    addListSection('Project Details:', jsonData?.projects, 'projectType');
 
-      if (currentY > pageHeight) {
-        doc.addPage();
-        currentY = 20;
-      }
-    });
-
-    // Add Manpower Stats
-    addTextToPDF('Manpower Stats:', currentY);
-    currentY += 10;
-    const manpower = jsonData.manpower;
-    manpower.forEach((stat, index) => {
-      addTextToPDF(`${index + 1}. ${stat.name}`, currentY);
-      currentY += 10;
-
-      if (currentY > pageHeight) {
-        doc.addPage();
-        currentY = 20;
-      }
-    });
-
-    // Add Remittance Details
-    addTextToPDF('Remittance Details:', currentY);
-    currentY += 10;
-    const remittances = jsonData.remittances;
-    remittances.forEach((remittance, index) => {
-      addTextToPDF(`${index + 1}. ${remittance.name}`, currentY);
-      currentY += 10;
-
-      if (currentY > pageHeight) {
-        doc.addPage();
-        currentY = 20;
-      }
-    });
-
-    // Add Implementation Programs
-    addTextToPDF('Implementation Programs:', currentY);
-    currentY += 10;
-    const programs = jsonData.implementationPrograms;
-    programs.forEach((program, index) => {
-      addTextToPDF(`${index + 1}. ${program.name}`, currentY);
-      currentY += 10;
-
-      if (currentY > pageHeight) {
-        doc.addPage();
-        currentY = 20;
-      }
-    });
-
-    // Add Contact Details
-    addTextToPDF('Contact Details:', currentY);
-    currentY += 10;
-    const contacts = jsonData.contacts;
-    contacts.forEach((contact, index) => {
-      addTextToPDF(`${index + 1}. ${contact.name}`, currentY);
-      currentY += 10;
-
-      if (currentY > pageHeight) {
-        doc.addPage();
-        currentY = 20;
-      }
-    });
-
-    // Add Declaration Details
-    addTextToPDF('Declaration Details:', currentY);
-    currentY += 10;
-    const declarations = jsonData.declarations;
-    declarations.forEach((declaration, index) => {
-      addTextToPDF(`${index + 1}. ${declaration.name}`, currentY);
-      currentY += 10;
-
-      if (currentY > pageHeight) {
-        doc.addPage();
-        currentY = 20;
-      }
-    });
-
-    // Save PDF
+    // Save the PDF
     doc.save('Investor_Report.pdf');
-  };
+  } catch (error) {
+    console.error('PDF generation failed:', error);
+    alert('Failed to generate PDF. Check console for details.');
+  }
+};
+
+ 
 
   if (!jsonData) {
     return (
