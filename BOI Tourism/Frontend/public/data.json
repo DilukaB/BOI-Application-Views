@@ -1,0 +1,44 @@
+{
+  "typeOfTourismProjects": {
+    "tourismProjectType": ["Resort Head", "Villa"],
+    "noRoom": 50,
+    "expectedStar": 4
+  },
+  "declarations": [
+    {
+      "investorID": "INV-1001",
+      "cname": "John A. Smith",
+      "designation": "Chief Investment Officer",
+      "cadD1": "123 Financial District",
+      "cadD2": "Suite 450",
+      "cadD3": "New York, NY 10005",
+      "ctel": "+1 (212) 555-0100",
+      "cfax": "+1 (212) 555-0101",
+      "ceml": "john.smith@abcinvestments.com"
+    },
+    {
+      "investorID": "INV-1002",
+      "cname": "Maria Garcia",
+      "designation": "Portfolio Manager",
+      "cadD1": "456 Wall Street",
+      "cadD2": "Floor 22",
+      "cadD3": "New York, NY 10005",
+      "ctel": "+1 (212) 555-0200",
+      "cfax": "+1 (212) 555-0201",
+      "ceml": "maria.garcia@abcinvestments.com"
+    },
+    {
+      "investorID": "INV-1003",
+      "cname": "Robert Chen",
+      "designation": "Senior Analyst",
+      "cadD1": "789 Broadway Avenue",
+      "cadD2": "Building B",
+      "cadD3": "Boston, MA 02116",
+      "ctel": "+1 (617) 555-0300",
+      "cfax": "+1 (617) 555-0301",
+      "ceml": "robert.chen@abcinvestments.com"
+    }
+     
+  ]
+ 
+}

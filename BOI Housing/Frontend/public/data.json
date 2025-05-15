@@ -1,0 +1,316 @@
+{
+    "applicationNo": "string",
+    "siteAppCode": "string",
+    "investorID": "string",
+    "siteLocations": [
+        {
+            "facadD1": "123 Main St",
+            "facadD2": "Suite 400",
+            "facadD3": "Building A",
+            "factel": "+1-555-123-4567",
+            "factlx": "+1-555-765-4321",
+            "facfax": "+1-555-987-6543",
+            "faceml": "info@facility.com",
+            "lndacr": 10.5,
+            "lndrood": 8.2,
+            "lndpurch": 5.0,
+            "facprvcd": "PRV123",
+            "facdistcd": "DST456",
+            "facagacd": "AGC789",
+            "longitude": "72.8777",
+            "latitude": "19.0760",
+            "ownership": "Private",
+            "numberOfUnits": "20",
+            "offSiteInfrastructure": "Road access, power supply",
+            "onSiteInfrastructure": "Warehouse, office buildings",
+            "coveredSpace": 15000,
+            "existingBuildings": "3 warehouses, 1 admin block"
+        },
+        {
+            "facadD1": "Ministry of Health",
+            "facadD2": "Department of Medical Services",
+            "facadD3": "Central Regional Hospital",
+            "factel": "+94 11 2345678",
+            "factlx": "+94 11 8765432",
+            "facfax": "+94 11 2233445",
+            "faceml": "info@centralhospital.lk",
+            "lndacr": 2.5,
+            "lndrood": 0.3,
+            "lndpurch": 15000000,
+            "facprvcd": "WP",
+            "facdistcd": "CO",
+            "facagacd": "AG001",
+            "longitude": "79.8612",
+            "latitude": "6.9271",
+            "ownership": "Government",
+            "numberOfUnits": "5",
+            "offSiteInfrastructure": "Access road, electricity, water supply",
+            "onSiteInfrastructure": "Sewage system, internal roads, fencing",
+            "coveredSpace": 12000,
+            "existingBuildings": "Administration block, OPD, inpatient ward"
+          },
+          {
+            "facadD1": "Ministry of Health",
+            "facadD2": "Department of Medical Services",
+            "facadD3": "Central Regional Hospital",
+            "factel": "+94 11 2345678",
+            "factlx": "+94 11 8765432",
+            "facfax": "+94 11 2233445",
+            "faceml": "info@centralhospital.lk",
+            "lndacr": 2.5,
+            "lndrood": 0.3,
+            "lndpurch": 15000000,
+            "facprvcd": "WP",
+            "facdistcd": "CO",
+            "facagacd": "AG001",
+            "longitude": "79.8612",
+            "latitude": "6.9271",
+            "ownership": "Government",
+            "numberOfUnits": "5",
+            "offSiteInfrastructure": "Access road, electricity, water supply",
+            "onSiteInfrastructure": "Sewage system, internal roads, fencing",
+            "coveredSpace": 12000,
+            "existingBuildings": "Administration block, OPD, inpatient ward"
+          }
+          
+    ],
+    "equipmentList": [
+        {
+            "eqpdes": "string",
+            "eqpcnd": "string",
+            "eqppwr": "string",
+            "eqpcap": "string",
+            "equval": 0
+        },
+        {
+            "eqpdes": "string",
+            "eqpcnd": "string",
+            "eqppwr": "string",
+            "eqpcap": "string",
+            "equval": 0
+        },
+        {
+            "eqpdes": "string",
+            "eqpcnd": "string",
+            "eqppwr": "string",
+            "eqpcap": "string",
+            "equval": 0
+        }
+    ],
+    "machineryLists": [
+        {
+            "machineDescription": "string",
+            "horsePower": "string",
+            "quantity": 0,
+            "condition": "string",
+            "machineryValue": 0
+        }
+    ],
+    "rawMaterials": [
+        {
+            "itemDescription": "string",
+            "unitPerMonth": "string",
+            "quantityPerMonth": 0,
+            "source": "string"
+        }
+    ],
+    "fuelConsumptions": [
+        {
+            "eqpcd": "string",
+            "noeqp": 0,
+            "plpermth": 0,
+            "dlpermth": 0,
+            "fulpermth": 0,
+            "klpermth": 0,
+            "biomas": 0,
+            "capacity": "string"
+        }
+    ],
+    "waterConsumptions": [
+        {
+            "useOfWater": "Construction Use",
+            "commenceProduction": 1200,
+            "waterCapacity": 2000
+        },
+        {
+            "useOfWater": "Domestic Requirements",
+            "commenceProduction": 800,
+            "waterCapacity": 1500
+        }
+    ],
+    "solidWasteList": [
+        {
+            "swsno": "string",
+            "swNature": "string",
+            "swqty": 4,
+            "swTreatment": "string",
+            "swDisMode": "string"
+        }
+    ],
+    "wasteWaterList": [
+        {
+            "wwsno": "string",
+            "wwVolume": 0,
+            "wwTreatment": "string",
+            "wwDisposalMode": "string"
+        }
+    ],
+    "sewageList": [
+        {
+            "swNatureOfEffluent": "From construction use",
+            "swTreatment": "Sedimentation and filtration",
+            "swMethDisposal": "Used for dust suppression"
+        },
+        {
+            "swNatureOfEffluent": "From human use",
+            "swTreatment": "Septic tank followed by soak pit",
+            "swMethDisposal": "Soak pit or municipal sewage"
+        }
+    ],
+    "noiseList": [
+        {
+            "noiseCode": "N001",
+            "niceDescription": [
+                {
+                    "description": "High-frequency noise from machinery."
+                }
+            ]
+        },
+        {
+            "noiseCode": "N002",
+            "niceDescription": [
+                {
+                    "description": "Low-frequency hum from electrical equipment."
+                }
+            ]
+        },
+        {
+            "noiseCode": "N003",
+            "niceDescription": [
+                {
+                    "description": "Intermittent beeping noise from sensors."
+                }
+            ]
+        },
+        {
+            "noiseCode": "N004",
+            "niceDescription": [
+                {
+                    "description": "Continuous whirring noise from ventilation systems."
+                }
+            ]
+        },
+        {
+            "noiseCode": "N005",
+            "niceDescription": [
+                {
+                    "description": "Sharp clattering noise from metal machinery parts."
+                }
+            ]
+        },
+        {
+            "noiseCode": "N006",
+            "niceDescription": [
+                {
+                    "description": "Loud humming sound from high-voltage equipment."
+                }
+            ]
+        },
+        {
+            "noiseCode": "N007",
+            "niceDescription": [
+                {
+                    "description": "Sudden bursts of noise from pneumatic tools."
+                }
+            ]
+        },
+        {
+            "noiseCode": "N008",
+            "niceDescription": [
+                {
+                    "description": "Continuous fan noise from air conditioning units."
+                }
+            ]
+        }
+    ],
+    "electricityList": [
+        {
+            "erCode": "During Construction period",
+            "commenceProduction": 200,
+            "erCapacity": 300
+        },
+        {
+            "erCode": "Domestic requirement",
+            "commenceProduction": 100,
+            "erCapacity": 150
+        }
+    ],
+    "contactOfficerList": [
+        {
+            "cntname": "Jane Doe",
+            "cntAddress": "123 Green Street, Springfield",
+            "cntTel": "+1-555-1234",
+            "cntEmail": "jane.doe@example.com",
+            "cntFax": "+1-555-5678"
+        },
+        {
+            "cntname": "Jane Doe",
+            "cntAddress": "123 Green Street, Springfield",
+            "cntTel": "+1-555-1234",
+            "cntEmail": "jane.doe@example.com",
+            "cntFax": "+1-555-5678"
+        },
+        {
+            "cntname": "Jane Doe",
+            "cntAddress": "123 Green Street, Springfield",
+            "cntTel": "+1-555-1234",
+            "cntEmail": "jane.doe@example.com",
+            "cntFax": "+1-555-5678"
+        }
+    ],
+    "investorList": [
+        {
+            "invName": "David James",
+            "invTel": "0115783463",
+            "invEmail": "davidofficial@gmail.com",
+            "invFax": "string"
+        },
+        {
+            "invName": "string",
+            "invTel": "string",
+            "invEmail": "string",
+            "invFax": "string"
+        },
+        {
+            "invName": "string",
+            "invTel": "string",
+            "invEmail": "string",
+            "invFax": "string"
+        }
+    ],
+    "hazardousList": [
+        {
+            "hazardousDes": "string"
+        },
+        {
+            "hazardousDes": "string"
+        }
+    ],
+    "fireRiskList": [
+        {
+            "fireRiskDescription": "string"
+        }
+    ],
+    "siteUploadFile": [
+        {
+            "investorID": "string",
+            "fileRefCode": "string",
+            "fileName": "string"
+        }
+    ],
+    "typeOfTourismProjects": {
+        "tourismProjectType": "string",
+        "noRoom": "string",
+        "expectedStar": 0
+    }
+}
