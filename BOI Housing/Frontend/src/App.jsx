@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { jsPDF } from 'jspdf';
 import autoTable from 'jspdf-autotable';
-
 import SiteLocationsForm from './components/SiteLocationsForm';
 import EquipmentTable from './components/EquipmentTable';
 import WaterConsumptionTable from './components/WaterConsumptionTable';

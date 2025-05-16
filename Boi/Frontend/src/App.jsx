@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { jsPDF } from 'jspdf';
+import autoTable from 'jspdf-autotable';
 import InvestorsList from './components/InvestorsList';
 import ProjectDetails from './components/ProjectDetails';
 import ProductsTable from './components/ProductsTable';
@@ -23,185 +24,307 @@ function App() {
       });
   }, []);
 
-  const handleDownloadPDF = () => {
-    const doc = new jsPDF();
+ const handleDownloadPDF = () => {
+  const doc = new jsPDF();
+  let currentY = 20;
+  const pageHeight = 270;
+  let sectionNumber = 1;
 
-    const addTextToPDF = (text, yPosition) => {
-      doc.text(text, 10, yPosition);
-    };
-
-    const addTableToPDF = (headers, data, startY) => {
-      let currentY = startY;
-
-      // Adding table headers
-      doc.setFontSize(10);
-      headers.forEach((header, index) => {
-        doc.text(header, 10 + index * 50, currentY);
-      });
-
-      currentY += 10;
-
-      // Adding table rows
-      data.forEach((row, index) => {
-        row.forEach((cell, cellIndex) => {
-          doc.text(cell, 10 + cellIndex * 50, currentY);
-        });
-        currentY += 10;
-      });
-
-      return currentY;
-    };
-
-    let currentY = 20;
-    const pageHeight = 270; // standard A4 size - margin from top and bottom
-
-    // Add title
-    doc.setFontSize(16);
-    doc.text('Investor Dashboard', 105, currentY, { align: 'center' });
-    currentY += 20;
-
-    // Add Investors List
-    addTextToPDF('Investors List:', currentY);
-    currentY += 10;
-    const investors = jsonData.investors;
-    investors.forEach((investor, index) => {
-      addTextToPDF(`${index + 1}. ${investor.name}`, currentY);
-      currentY += 10;
-
-      // Check if we need to add a new page
-      if (currentY > pageHeight) {
-        doc.addPage();
-        currentY = 20;
-      }
-    });
-
-    // Add Project Details
-    addTextToPDF('Project Details:', currentY);
-    currentY += 10;
-    const projects = jsonData.projects;
-    projects.forEach((project, index) => {
-      addTextToPDF(`${index + 1}. ${project.name}`, currentY);
-      currentY += 10;
-
-      if (currentY > pageHeight) {
-        doc.addPage();
-        currentY = 20;
-      }
-    });
-
-    // Add Products Table
-    addTextToPDF('Products:', currentY);
-    currentY += 10;
-    const products = jsonData.products;
-    const productHeaders = ['Product Name'];
-    const productData = products.map((product) => [product.name]);
-    currentY = addTableToPDF(productHeaders, productData, currentY);
-
-    if (currentY > pageHeight) {
-      doc.addPage();
-      currentY = 20;
-    }
-
-    // Add Investment Table
-    addTextToPDF('Investment Details:', currentY);
-    currentY += 10;
-    const investments = jsonData.investment;
-    const investmentHeaders = ['Investor', 'Amount'];
-    const investmentData = investments.map((investment) => [investment.name, investment.amount]);
-    currentY = addTableToPDF(investmentHeaders, investmentData, currentY);
-
-    if (currentY > pageHeight) {
-      doc.addPage();
-      currentY = 20;
-    }
-
-    // Add Proposed Financing
-    addTextToPDF('Proposed Financing:', currentY);
-    currentY += 10;
-    const financing = jsonData.proposedFinancing;
-    financing.forEach((item, index) => {
-      addTextToPDF(`${index + 1}. ${item.name}`, currentY);
-      currentY += 10;
-
-      if (currentY > pageHeight) {
-        doc.addPage();
-        currentY = 20;
-      }
-    });
-
-    // Add Manpower Stats
-    addTextToPDF('Manpower Stats:', currentY);
-    currentY += 10;
-    const manpower = jsonData.manpower;
-    manpower.forEach((stat, index) => {
-      addTextToPDF(`${index + 1}. ${stat.name}`, currentY);
-      currentY += 10;
-
-      if (currentY > pageHeight) {
-        doc.addPage();
-        currentY = 20;
-      }
-    });
-
-    // Add Remittance Details
-    addTextToPDF('Remittance Details:', currentY);
-    currentY += 10;
-    const remittances = jsonData.remittances;
-    remittances.forEach((remittance, index) => {
-      addTextToPDF(`${index + 1}. ${remittance.name}`, currentY);
-      currentY += 10;
-
-      if (currentY > pageHeight) {
-        doc.addPage();
-        currentY = 20;
-      }
-    });
-
-    // Add Implementation Programs
-    addTextToPDF('Implementation Programs:', currentY);
-    currentY += 10;
-    const programs = jsonData.implementationPrograms;
-    programs.forEach((program, index) => {
-      addTextToPDF(`${index + 1}. ${program.name}`, currentY);
-      currentY += 10;
-
-      if (currentY > pageHeight) {
-        doc.addPage();
-        currentY = 20;
-      }
-    });
-
-    // Add Contact Details
-    addTextToPDF('Contact Details:', currentY);
-    currentY += 10;
-    const contacts = jsonData.contacts;
-    contacts.forEach((contact, index) => {
-      addTextToPDF(`${index + 1}. ${contact.name}`, currentY);
-      currentY += 10;
-
-      if (currentY > pageHeight) {
-        doc.addPage();
-        currentY = 20;
-      }
-    });
-
-    // Add Declaration Details
-    addTextToPDF('Declaration Details:', currentY);
-    currentY += 10;
-    const declarations = jsonData.declarations;
-    declarations.forEach((declaration, index) => {
-      addTextToPDF(`${index + 1}. ${declaration.name}`, currentY);
-      currentY += 10;
-
-      if (currentY > pageHeight) {
-        doc.addPage();
-        currentY = 20;
-      }
-    });
-
-    // Save PDF
-    doc.save('Investor_Report.pdf');
+  const addSectionHeader = (text, yPosition, sectionNumber) => {
+    doc.setFontSize(12);
+    doc.setFont('helvetica', 'bold');
+    doc.text(`${sectionNumber}. ${text}`, 10, yPosition);
   };
+
+  const addLabelValue = (label, value, yPosition, labelX = 10, valueX = 60) => {
+    doc.setFontSize(10);
+    doc.setFont('helvetica', 'normal');
+    doc.text(`${label}`, labelX, yPosition);
+    doc.setFont('helvetica', 'bold');
+    doc.text(`${value}`, valueX, yPosition);
+  };
+
+  const ensureSpace = (spaceNeeded = 20) => {
+    if (currentY + spaceNeeded > pageHeight) {
+      doc.addPage();
+      currentY = 20;
+    }
+  };
+
+  // Title
+  doc.setFontSize(16);
+  doc.setFont('helvetica', 'bold');
+  doc.text('Investor Dashboard', 105, currentY, { align: 'center' });
+  currentY += 20;
+
+  // --- Investors List Section ---
+  ensureSpace(15);
+  addSectionHeader('Particulars of Investors', currentY, sectionNumber++);
+  currentY += 10;
+
+  jsonData.investors.forEach((inv, index) => {
+    ensureSpace(60);
+    doc.setFontSize(11);
+    doc.setFont('helvetica', 'bold');
+    doc.text(`Investor ${index + 1}:`, 10, currentY);
+    doc.setFont('helvetica', 'normal');
+    doc.text(inv.shdname || 'N/A', 50, currentY);
+    currentY += 8;
+
+    doc.setFontSize(10);
+    doc.setFont('helvetica', 'bold');
+    doc.text(`Equity Contribution: $${inv.equity}M | ${inv.eqtypct}%`, 10, currentY);
+    currentY += 10;
+
+    addLabelValue('Citizenship:', inv.citizen || 'N/A', currentY); currentY += 8;
+    addLabelValue('ID/Passport:', inv.invtidno || 'N/A', currentY); currentY += 8;
+
+    const address = [inv.shdadD1, inv.shdadD2, inv.shdadD3, inv.shdadD4].filter(Boolean).join(', ') || 'N/A';
+    addLabelValue('Address:', address, currentY); currentY += 10;
+    addLabelValue('Telephone:', inv.shdtel || '—', currentY); currentY += 8;
+    addLabelValue('Fax:', inv.shdfax || '—', currentY); currentY += 8;
+    addLabelValue('Email:', inv.shdeml || '—', currentY); currentY += 10;
+
+    doc.setFont('helvetica', 'bold');
+    doc.text('Current Business Interests:', 10, currentY);
+    currentY += 6;
+    doc.setFont('helvetica', 'normal');
+    const businessLines = doc.splitTextToSize(inv.businessInterest || 'N/A', 180);
+    doc.text(businessLines, 15, currentY);
+    currentY += businessLines.length * 6 + 4;
+
+    doc.setFont('helvetica', 'bold');
+    doc.text('Previous BOI Projects:', 10, currentY);
+    currentY += 6;
+    doc.setFont('helvetica', 'normal');
+    const projectsLines = doc.splitTextToSize(inv.companyProfile || 'None', 180);
+    doc.text(projectsLines, 15, currentY);
+    currentY += projectsLines.length * 6 + 4;
+
+    doc.setFont('helvetica', 'bold');
+    doc.text('Other BOI Interests:', 10, currentY);
+    currentY += 6;
+    doc.setFont('helvetica', 'normal');
+    const otherInterestLines = doc.splitTextToSize(inv.interestProj || 'None', 180);
+    doc.text(otherInterestLines, 15, currentY);
+    currentY += otherInterestLines.length * 6 + 12;
+  });
+
+  // --- Project Details Section ---
+  ensureSpace(30);
+  addSectionHeader('Project Details', currentY, sectionNumber++);
+  currentY += 10;
+
+  const project = jsonData.projects[0] || {};
+  addLabelValue('Project Type:', project.projectType || 'N/A', currentY); currentY += 10;
+  addLabelValue('Description:', project.projectDes || 'N/A', currentY); currentY += 15;
+
+  // --- Marketing Programme Table Section ---
+  ensureSpace(40);
+  addSectionHeader('Marketing Programme for One Year', currentY, sectionNumber++);
+  currentY += 10;
+
+  autoTable(doc, {
+    startY: currentY,
+    head: [[
+      'Product/Service', 'Unit Measure', 'Exports - QT', 'Exports - VL', 'Exports - %',
+      'Local Sales - QT', 'Local Sales - VL', 'Local Sales - %', 'Total QT', 'Total VL'
+    ]],
+    body: jsonData.products.map((product) => {
+      const totalqt = Number(product.expqtymrk) + Number(product.qtylocsle);
+      const totalvt = Number(product.expvlumrk) + Number(product.locslevlu);
+      return [
+        product.prodserv,
+        product.unitmeasure,
+        product.expqtymrk,
+        product.expvlumrk,
+        product.exppercentage,
+        product.qtylocsle,
+        product.locslevlu,
+        product.locpercentage,
+        totalqt,
+        totalvt
+      ];
+    }),
+    theme: 'grid',
+    headStyles: { fillColor: [240, 240, 240], textColor: 0 },
+    styles: { fontSize: 9, cellPadding: 2 },
+    didDrawPage: (data) => {
+      currentY = data.cursor.y + 10;
+    }
+  });
+
+  // --- Manpower Requirements Section ---
+  ensureSpace(40);
+  addSectionHeader('Manpower Requirements', currentY, sectionNumber++);
+  currentY += 10;
+
+  const manpowerBody = jsonData.manpower.map((item) => [
+    item.isinicap || 'N/A',
+    item.formgr ?? 0,
+    item.locmgr ?? 0,
+    item.forCLR ?? 0,
+    item.locclr ?? 0
+  ]);
+  const totals = jsonData.manpower.reduce((acc, item) => {
+    acc.initialForeign += item.formgr || 0;
+    acc.initialLocal += item.locmgr || 0;
+    acc.capacityForeign += item.forCLR || 0;
+    acc.capacityLocal += item.locclr || 0;
+    return acc;
+  }, { initialForeign: 0, initialLocal: 0, capacityForeign: 0, capacityLocal: 0 });
+
+  manpowerBody.push([
+    'Total',
+    totals.initialForeign,
+    totals.initialLocal,
+    totals.capacityForeign,
+    totals.capacityLocal
+  ]);
+
+  autoTable(doc, {
+    startY: currentY,
+    head: [
+      [{ content: 'Category', rowSpan: 2 }, { content: 'Initial Requirement', colSpan: 2 }, { content: 'Capacity Requirement', colSpan: 2 }],
+      ['Foreign', 'Local', 'Foreign', 'Local']
+    ],
+    body: manpowerBody,
+    theme: 'grid',
+    headStyles: { fillColor: [240, 240, 240], textColor: 0 },
+    styles: { fontSize: 9, cellPadding: 2 },
+    columnStyles: {
+      0: { cellWidth: 50 }, 1: { halign: 'center' }, 2: { halign: 'center' },
+      3: { halign: 'center' }, 4: { halign: 'center' }
+    },
+    didDrawPage: (data) => {
+      currentY = data.cursor.y + 10;
+    }
+  });
+
+  // --- Remittable Liabilities Section ---
+  ensureSpace(40);
+  addSectionHeader('Remittable Liabilities', currentY, sectionNumber++);
+  currentY += 10;
+
+  const remittanceTableBody = jsonData.remittances.map((item) => {
+    const total =
+      Number(item.rmtramtyR1 || 0) + Number(item.rmtramtyR2 || 0) +
+      Number(item.rmtramtyR3 || 0) + Number(item.rmtramtyR4 || 0) +
+      Number(item.rmtramtyR5 || 0);
+    return [
+      item.remitterOrigin || 'N/A',
+      item.rmtrort || 'N/A',
+      item.rmtrcmp || 'N/A',
+      item.rmtrprd || 'N/A',
+      item.rmtramtyR1 || 0,
+      item.rmtramtyR2 || 0,
+      item.rmtramtyR3 || 0,
+      item.rmtramtyR4 || 0,
+      item.rmtramtyR5 || 0,
+      total.toFixed(2)
+    ];
+  });
+
+  autoTable(doc, {
+    startY: currentY,
+    head: [[
+      'Remitter Origin', 'Remittance Type', 'Company', 'Period',
+      'R1', 'R2', 'R3', 'R4', 'R5', 'Total'
+    ]],
+    body: remittanceTableBody,
+    theme: 'grid',
+    headStyles: { fillColor: [240, 240, 240], textColor: 0 },
+    styles: { fontSize: 9, cellPadding: 2 },
+    columnStyles: {
+      4: { halign: 'right' }, 5: { halign: 'right' }, 6: { halign: 'right' },
+      7: { halign: 'right' }, 8: { halign: 'right' }, 9: { halign: 'right', fontStyle: 'bold' }
+    },
+    didDrawPage: (data) => {
+      currentY = data.cursor.y + 10;
+    }
+  });
+
+  // --- Programme of Implementation Section ---
+  ensureSpace(30);
+  addSectionHeader('Programme of Implementation', currentY, sectionNumber++);
+  currentY += 10;
+
+  const implementationTableBody = jsonData.implementationPrograms.map((item) => [
+    item.investorID || 'N/A',
+    item.lvlimplcd || 'N/A',
+    item.mthaftagr !== undefined ? item.mthaftagr : 'N/A'
+  ]);
+
+  autoTable(doc, {
+    startY: currentY,
+    head: [['Investor ID', 'Activity', 'Months After Agreement']],
+    body: implementationTableBody,
+    theme: 'grid',
+    headStyles: { fillColor: [240, 240, 240], textColor: 0 },
+    styles: { fontSize: 9, cellPadding: 2 },
+    columnStyles: { 2: { halign: 'center' } },
+    didDrawPage: (data) => {
+      currentY = data.cursor.y + 10;
+    }
+  });
+
+  // --- Declaration Details Section ---
+  ensureSpace(40);
+  addSectionHeader('Declaration Details', currentY, sectionNumber++);
+  currentY += 10;
+
+  const declarationStatement = `I declare that the information furnished above in this application, attachments, and otherwise represented are true and correct, and I undertake to inform the BOI immediately if there is any change in the information provided.`;
+  const declarationLines = doc.splitTextToSize(declarationStatement, 180);
+  doc.setFont('helvetica', 'normal');
+  doc.setFontSize(10);
+  doc.text(declarationLines, 10, currentY);
+  currentY += declarationLines.length * 6 + 10;
+
+  const declarationBody = (jsonData.declarations || []).map((decl) => [
+    decl.investorID || 'N/A',
+    decl.cname || 'N/A',
+    decl.designation || 'N/A',
+    [decl.cadD1, decl.cadD2, decl.cadD3].filter(Boolean).join(', ') || 'N/A',
+    decl.ctel || 'N/A',
+    decl.cfax || 'N/A',
+    decl.ceml || 'N/A'
+  ]);
+
+  if (declarationBody.length > 0) {
+    autoTable(doc, {
+      startY: currentY,
+      head: [['Investor ID', 'Name', 'Designation', 'Address', 'Phone', 'Fax', 'Email']],
+      body: declarationBody,
+      theme: 'grid',
+      headStyles: { fillColor: [240, 240, 240], textColor: 0 },
+      styles: { fontSize: 9, cellPadding: 2 },
+      columnStyles: { 3: { cellWidth: 50 }, 6: { cellWidth: 40 } },
+      didDrawPage: (data) => {
+        currentY = data.cursor.y + 10;
+      }
+    });
+
+    declarationBody.forEach((row) => {
+      ensureSpace(15);
+      doc.setFont('helvetica', 'bold');
+      doc.text(`Investor ID: ${row[0]}`, 10, currentY);
+      doc.text('Investor Signature: ________________________', 60, currentY);
+      doc.text('Date: ____________', 160, currentY);
+      currentY += 10;
+    });
+  }
+
+  // Add page numbers
+  const pageCount = doc.internal.getNumberOfPages();
+  for (let i = 1; i <= pageCount; i++) {
+    doc.setPage(i);
+    doc.setFontSize(8);
+    doc.text(`Page ${i} of ${pageCount}`, 195, 285, { align: 'right' });
+  }
+
+  doc.save('Investor_Report.pdf');
+};
+
 
   if (!jsonData) {
     return (
