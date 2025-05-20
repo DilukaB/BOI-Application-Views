@@ -1,7 +1,6 @@
 import React, { useRef } from "react";
 import jsPDF from "jspdf";
 import domtoimage from "dom-to-image";
-
 import TourismProject from "./components/TourismProject";
 import DeclarationForm from "./components/DeclarationForm";
 import LocationForm from "./components/LocationForm";
