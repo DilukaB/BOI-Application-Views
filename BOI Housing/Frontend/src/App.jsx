@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+ import { useState, useEffect } from 'react';
 import React from 'react';
 import SiteLocationsForm from './components/SiteLocationsForm';
 import EquipmentTable from './components/EquipmentTable';
@@ -58,4 +58,4 @@ function App() {
   );
 }
 
-export default App;
+export default App; 

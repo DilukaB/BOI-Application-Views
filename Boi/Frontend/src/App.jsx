@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+  import React, { useEffect, useState } from 'react';
 import { jsPDF } from 'jspdf';
 import InvestorsList from './components/InvestorsList';
 import ProjectDetails from './components/ProjectDetails';
@@ -17,189 +17,117 @@ function App() {
   useEffect(() => {
     fetch('/data.json')
       .then((res) => res.json())
-      .then((data) => setJsonData(data))
+      .then((data) => {
+        console.log("Loaded jsonData:", data);
+        setJsonData(data);
+      })
       .catch((error) => {
         console.error('Failed to load data.json:', error);
       });
   }, []);
 
   const handleDownloadPDF = () => {
-    const doc = new jsPDF();
+    const doc = new jsPDF({ unit: 'pt', format: 'a4' });
+    const pageWidth = doc.internal.pageSize.getWidth();
+    const pageHeight = doc.internal.pageSize.getHeight();
+    const margin = 40;
+    let currentY = margin;
 
-    const addTextToPDF = (text, yPosition) => {
-      doc.text(text, 10, yPosition);
-    };
-
-    const addTableToPDF = (headers, data, startY) => {
-      let currentY = startY;
-
-      // Adding table headers
+    // Add page footer with page number
+    const addFooter = (pageNum) => {
       doc.setFontSize(10);
-      headers.forEach((header, index) => {
-        doc.text(header, 10 + index * 50, currentY);
-      });
-
-      currentY += 10;
-
-      // Adding table rows
-      data.forEach((row, index) => {
-        row.forEach((cell, cellIndex) => {
-          doc.text(cell, 10 + cellIndex * 50, currentY);
-        });
-        currentY += 10;
-      });
-
-      return currentY;
+      doc.setTextColor(150);
+      doc.text(`Page ${pageNum}`, pageWidth - margin, pageHeight - 20, { align: 'right' });
     };
 
-    let currentY = 20;
-    const pageHeight = 270; // standard A4 size - margin from top and bottom
+    // Add section title with underline
+    const addSectionTitle = (title) => {
+      checkAddPage(40);
+      doc.setFont('helvetica', 'bold');
+      doc.setFontSize(16);
+      doc.setTextColor('#003366');
+      doc.text(title, margin, currentY);
+      currentY += 6;
+      // underline
+      doc.setDrawColor('#003366');
+      doc.setLineWidth(1.5);
+      doc.line(margin, currentY, pageWidth - margin, currentY);
+      currentY += 15;
+      doc.setFont('helvetica', 'normal');
+      doc.setFontSize(12);
+      doc.setTextColor(0);
+    };
 
-    // Add title
-    doc.setFontSize(16);
-    doc.text('Investor Dashboard', 105, currentY, { align: 'center' });
-    currentY += 20;
-
-    // Add Investors List
-    addTextToPDF('Investors List:', currentY);
-    currentY += 10;
-    const investors = jsonData.investors;
-    investors.forEach((investor, index) => {
-      addTextToPDF(`${index + 1}. ${investor.name}`, currentY);
-      currentY += 10;
-
-      // Check if we need to add a new page
-      if (currentY > pageHeight) {
+    // Check if need to add new page
+    const checkAddPage = (heightNeeded = 20) => {
+      if (currentY + heightNeeded > pageHeight - margin) {
+        addFooter(doc.getNumberOfPages());
         doc.addPage();
-        currentY = 20;
+        currentY = margin;
       }
-    });
+    };
 
-    // Add Project Details
-    addTextToPDF('Project Details:', currentY);
-    currentY += 10;
-    const projects = jsonData.projects;
-    projects.forEach((project, index) => {
-      addTextToPDF(`${index + 1}. ${project.name}`, currentY);
+    // Render array of objects as a table
+    const renderTable = (title, dataList) => {
+      if (!Array.isArray(dataList) || dataList.length === 0) return;
+
+      addSectionTitle(title);
+
+      // Extract all column headers
+      const columns = Array.from(
+        new Set(dataList.flatMap(item => Object.keys(item)))
+      );
+
+      const tableStartX = margin;
+      const tableWidth = pageWidth - margin * 2;
+      const colWidth = tableWidth / columns.length;
+
+      // Header row
+      doc.setFont('helvetica', 'bold');
+      doc.setFillColor(220, 220, 220);
+      doc.rect(tableStartX, currentY - 12, tableWidth, 20, 'F');
+
+      columns.forEach((col, i) => {
+        doc.text(col.charAt(0).toUpperCase() + col.slice(1), tableStartX + i * colWidth + 5, currentY);
+      });
+      currentY += 20;
+
+      doc.setFont('helvetica', 'normal');
+
+      dataList.forEach((item) => {
+        checkAddPage(20);
+        columns.forEach((col, i) => {
+          const text = item[col] !== undefined ? String(item[col]) : '';
+          const splitText = doc.splitTextToSize(text, colWidth - 10);
+          doc.text(splitText, tableStartX + i * colWidth + 5, currentY);
+        });
+        currentY += 18;
+      });
+
       currentY += 10;
+    };
 
-      if (currentY > pageHeight) {
-        doc.addPage();
-        currentY = 20;
-      }
-    });
+    // Document title
+    doc.setFontSize(22);
+    doc.setFont('helvetica', 'bold');
+    doc.setTextColor('#004080');
+    doc.text('Investor Dashboard Report', pageWidth / 2, currentY, { align: 'center' });
+    currentY += 30;
 
-    // Add Products Table
-    addTextToPDF('Products:', currentY);
-    currentY += 10;
-    const products = jsonData.products;
-    const productHeaders = ['Product Name'];
-    const productData = products.map((product) => [product.name]);
-    currentY = addTableToPDF(productHeaders, productData, currentY);
+    // Render all sections as tables if possible
+    renderTable('Investors List', jsonData.investors);
+    renderTable('Project Details', jsonData.projects);
+    renderTable('Products', jsonData.products);
+    renderTable('Investment Details', jsonData.investment);
+    renderTable('Proposed Financing', jsonData.proposedFinancing);
+    renderTable('Manpower Stats', jsonData.manpower);
+    renderTable('Remittance Details', jsonData.remittances);
+    renderTable('Implementation Programs', jsonData.implementationPrograms);
+    renderTable('Contact Details', jsonData.contacts);
+    renderTable('Declaration Details', jsonData.declarations);
 
-    if (currentY > pageHeight) {
-      doc.addPage();
-      currentY = 20;
-    }
+    addFooter(doc.getNumberOfPages());
 
-    // Add Investment Table
-    addTextToPDF('Investment Details:', currentY);
-    currentY += 10;
-    const investments = jsonData.investment;
-    const investmentHeaders = ['Investor', 'Amount'];
-    const investmentData = investments.map((investment) => [investment.name, investment.amount]);
-    currentY = addTableToPDF(investmentHeaders, investmentData, currentY);
-
-    if (currentY > pageHeight) {
-      doc.addPage();
-      currentY = 20;
-    }
-
-    // Add Proposed Financing
-    addTextToPDF('Proposed Financing:', currentY);
-    currentY += 10;
-    const financing = jsonData.proposedFinancing;
-    financing.forEach((item, index) => {
-      addTextToPDF(`${index + 1}. ${item.name}`, currentY);
-      currentY += 10;
-
-      if (currentY > pageHeight) {
-        doc.addPage();
-        currentY = 20;
-      }
-    });
-
-    // Add Manpower Stats
-    addTextToPDF('Manpower Stats:', currentY);
-    currentY += 10;
-    const manpower = jsonData.manpower;
-    manpower.forEach((stat, index) => {
-      addTextToPDF(`${index + 1}. ${stat.name}`, currentY);
-      currentY += 10;
-
-      if (currentY > pageHeight) {
-        doc.addPage();
-        currentY = 20;
-      }
-    });
-
-    // Add Remittance Details
-    addTextToPDF('Remittance Details:', currentY);
-    currentY += 10;
-    const remittances = jsonData.remittances;
-    remittances.forEach((remittance, index) => {
-      addTextToPDF(`${index + 1}. ${remittance.name}`, currentY);
-      currentY += 10;
-
-      if (currentY > pageHeight) {
-        doc.addPage();
-        currentY = 20;
-      }
-    });
-
-    // Add Implementation Programs
-    addTextToPDF('Implementation Programs:', currentY);
-    currentY += 10;
-    const programs = jsonData.implementationPrograms;
-    programs.forEach((program, index) => {
-      addTextToPDF(`${index + 1}. ${program.name}`, currentY);
-      currentY += 10;
-
-      if (currentY > pageHeight) {
-        doc.addPage();
-        currentY = 20;
-      }
-    });
-
-    // Add Contact Details
-    addTextToPDF('Contact Details:', currentY);
-    currentY += 10;
-    const contacts = jsonData.contacts;
-    contacts.forEach((contact, index) => {
-      addTextToPDF(`${index + 1}. ${contact.name}`, currentY);
-      currentY += 10;
-
-      if (currentY > pageHeight) {
-        doc.addPage();
-        currentY = 20;
-      }
-    });
-
-    // Add Declaration Details
-    addTextToPDF('Declaration Details:', currentY);
-    currentY += 10;
-    const declarations = jsonData.declarations;
-    declarations.forEach((declaration, index) => {
-      addTextToPDF(`${index + 1}. ${declaration.name}`, currentY);
-      currentY += 10;
-
-      if (currentY > pageHeight) {
-        doc.addPage();
-        currentY = 20;
-      }
-    });
-
-    // Save PDF
     doc.save('Investor_Report.pdf');
   };
 
@@ -213,7 +141,6 @@ function App() {
 
   return (
     <div className="p-6 bg-gray-100 min-h-screen">
-      {/* Download PDF button */}
       <div className="flex justify-end mb-4">
         <button
           onClick={handleDownloadPDF}
@@ -223,11 +150,8 @@ function App() {
         </button>
       </div>
 
-      {/* Content to be displayed on the screen */}
       <div className="space-y-8 bg-white p-6 rounded shadow-lg">
-        <h1 className="text-3xl font-bold text-center mb-6"></h1>
-
-        {/* Components with data */}
+        <h1 className="text-3xl font-bold text-center mb-6">Investor Dashboard</h1>
         <InvestorsList data={jsonData.investors} />
         <ProjectDetails data={jsonData.projects} />
         <ProductsTable data={jsonData.products} />
@@ -244,3 +168,4 @@ function App() {
 }
 
 export default App;
+
