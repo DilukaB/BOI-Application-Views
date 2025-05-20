@@ -322,7 +322,7 @@ function App() {
     doc.text(`Page ${i} of ${pageCount}`, 195, 285, { align: 'right' });
   }
 
-  doc.save('Investor_Report.pdf');
+  doc.save('Investor_Report.pdf');    
 };
 
 
