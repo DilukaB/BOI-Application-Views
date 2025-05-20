@@ -15,7 +15,7 @@ const LocationForm = () => {
   }, []);
 
   if (!location) {
-    return <p className="text-center text-gray-600">Loading location data...</p>;
+    return <p className="text-center text-gray-600">Loading location data....</p>;
   }
 
   return (
