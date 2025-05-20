@@ -32,17 +32,32 @@ function App() {
     fetchData();
   }, []);
 
-  const PAGE_MARGIN_LEFT = 14;
-  const PAGE_MARGIN_RIGHT = 14;
-  const PAGE_MARGIN_TOP = 20;
-  const PAGE_MARGIN_BOTTOM = 20;
-
   const generatePdf = () => {
     const doc = new jsPDF();
     const pageWidth = doc.internal.pageSize.getWidth();
     const pageHeight = doc.internal.pageSize.getHeight();
 
+    const PAGE_MARGIN_LEFT = 14;
+    const PAGE_MARGIN_RIGHT = 14;
+    const PAGE_MARGIN_TOP = 20;
+    const PAGE_MARGIN_BOTTOM = 20;
     let y = PAGE_MARGIN_TOP;
+
+    // COVER PAGE
+    doc.setFontSize(24);
+    doc.setTextColor(40, 40, 40);
+    doc.text('Board of Investment of Sri Lanka', pageWidth / 2, y + 30, { align: 'center' });
+
+    doc.setFontSize(20);
+    doc.text('Project Report', pageWidth / 2, y + 50, { align: 'center' });
+
+    doc.setFontSize(14);
+    doc.setTextColor(100);
+    const today = new Date().toLocaleDateString();
+    doc.text(`Date: ${today}`, pageWidth / 2, y + 80, { align: 'center' });
+
+    doc.addPage();
+    y = PAGE_MARGIN_TOP;
 
     const addHeaderFooter = () => {
       const pageCount = doc.getNumberOfPages();
@@ -55,7 +70,6 @@ function App() {
       }
     };
 
-    // Function to check if there's enough space on the page, else add new page
     const ensureSpace = (neededHeight) => {
       if (y + neededHeight > pageHeight - PAGE_MARGIN_BOTTOM) {
         doc.addPage();
@@ -63,12 +77,10 @@ function App() {
       }
     };
 
-    // Universal function to add a titled table with autoTable and page-break management
     const addTable = (title, columns, rows) => {
       const titleFontSize = 14;
       const tableFontSize = 8;
 
-      // Add title with space before it (if not first content)
       if (y !== PAGE_MARGIN_TOP) y += 10;
 
       ensureSpace(titleFontSize + 6);
@@ -77,7 +89,6 @@ function App() {
       doc.text(title, PAGE_MARGIN_LEFT, y);
       y += 6;
 
-      // Prepare autoTable options
       autoTable(doc, {
         startY: y,
         head: [columns],
@@ -87,19 +98,12 @@ function App() {
         theme: 'striped',
         margin: { left: PAGE_MARGIN_LEFT, right: PAGE_MARGIN_RIGHT },
         didDrawPage: (data) => {
-          // Update y position after table drawn
           y = data.cursor.y + 10;
         },
         pageBreak: 'auto',
         showHead: 'everyPage',
       });
     };
-
-    // Document Title
-    doc.setFontSize(20);
-    doc.setTextColor(0);
-    doc.text('Project Report', PAGE_MARGIN_LEFT, y);
-    y += 12;
 
     const data = locationsData;
 
@@ -206,7 +210,7 @@ function App() {
       );
     }
 
-    // 7.0 Investors with signatures
+    // 7.0 Investors with Signatures
     if (data.investorList?.length) {
       addTable(
         '7.0 Investors',
@@ -216,10 +220,8 @@ function App() {
         ])
       );
 
-      data.investorList.forEach((inv, index) => {
-        // Check space for signature block (approx 30 units)
+      data.investorList.forEach((inv) => {
         ensureSpace(30);
-
         doc.setFontSize(12);
         doc.setTextColor(0);
         doc.text(`Investor: ${inv.invName || 'N/A'}`, PAGE_MARGIN_LEFT, y);
@@ -235,6 +237,30 @@ function App() {
         y += 15;
       });
     }
+
+    // SUMMARY PAGE
+    doc.addPage();
+    y = PAGE_MARGIN_TOP;
+
+    doc.setFontSize(16);
+    doc.setTextColor(0);
+    doc.text('Summary', PAGE_MARGIN_LEFT, y);
+    y += 10;
+
+    doc.setFontSize(12);
+    const summaryText = `
+This document summarizes the key details of the proposed investment project submitted to the
+Board of Investment of Sri Lanka. It includes site location details, equipment lists, utility
+requirements, contact information, and investor declarations.
+
+The data provided herein will be used for investment assessment, infrastructure planning, and
+regulatory approvals. All investors are responsible for the accuracy of the provided data.
+
+Thank you for your cooperation.
+    `;
+
+    const summaryLines = doc.splitTextToSize(summaryText.trim(), pageWidth - PAGE_MARGIN_LEFT - PAGE_MARGIN_RIGHT);
+    doc.text(summaryLines, PAGE_MARGIN_LEFT, y);
 
     addHeaderFooter();
     doc.save('project_report.pdf');
