@@ -233,17 +233,18 @@
             ]
         }
     ],
-    "electricityList": [
-        {
-            "erCode": "During Construction period",
-            "commenceProduction": 200,
-            "erCapacity": 300
-        },
-        {
-            "erCode": "Domestic requirement",
-            "commenceProduction": 100,
-            "erCapacity": 150
-        }
+   "electricityList": [
+    {
+      "erCode": "Power (KVA)",
+      "commenceProduction": "50",
+      "erCapacity": "120"
+    },
+    {
+      "erCode": "Energy (Kwh)",
+      "commenceProduction": "1000",
+      "erCapacity": "3000"
+    }
+  
     ],
     "contactOfficerList": [
         {
