@@ -1,5 +1,6 @@
-  import React, { useEffect, useState } from 'react';
+ import React, { useEffect, useState, useRef } from 'react';
 import { jsPDF } from 'jspdf';
+import domtoimage from 'dom-to-image';
 import InvestorsList from './components/InvestorsList';
 import ProjectDetails from './components/ProjectDetails';
 import ProductsTable from './components/ProductsTable';
@@ -13,6 +14,7 @@ import Proposed_Financing from './components/Proposed_Financing';
 
 function App() {
   const [jsonData, setJsonData] = useState(null);
+  const pdfRef = useRef(null); // Ref for the full content container
 
   useEffect(() => {
     fetch('/data.json')
@@ -27,108 +29,52 @@ function App() {
   }, []);
 
   const handleDownloadPDF = () => {
-    const doc = new jsPDF({ unit: 'pt', format: 'a4' });
-    const pageWidth = doc.internal.pageSize.getWidth();
-    const pageHeight = doc.internal.pageSize.getHeight();
-    const margin = 40;
-    let currentY = margin;
+    const input = pdfRef.current;
+    if (!input) return;
 
-    // Add page footer with page number
-    const addFooter = (pageNum) => {
-      doc.setFontSize(10);
-      doc.setTextColor(150);
-      doc.text(`Page ${pageNum}`, pageWidth - margin, pageHeight - 20, { align: 'right' });
-    };
+    domtoimage.toPng(input, { quality: 1 }).then((imgData) => {
+      const pdf = new jsPDF('p', 'mm', 'a4');
+      const pageWidth = pdf.internal.pageSize.getWidth();
+      const pageHeight = pdf.internal.pageSize.getHeight();
 
-    // Add section title with underline
-    const addSectionTitle = (title) => {
-      checkAddPage(40);
-      doc.setFont('helvetica', 'bold');
-      doc.setFontSize(16);
-      doc.setTextColor('#003366');
-      doc.text(title, margin, currentY);
-      currentY += 6;
-      // underline
-      doc.setDrawColor('#003366');
-      doc.setLineWidth(1.5);
-      doc.line(margin, currentY, pageWidth - margin, currentY);
-      currentY += 15;
-      doc.setFont('helvetica', 'normal');
-      doc.setFontSize(12);
-      doc.setTextColor(0);
-    };
+      const img = new Image();
+      img.src = imgData;
+      img.onload = function () {
+        const imgWidth = pageWidth;
+        const imgHeight = (img.height * imgWidth) / img.width;
 
-    // Check if need to add new page
-    const checkAddPage = (heightNeeded = 20) => {
-      if (currentY + heightNeeded > pageHeight - margin) {
-        addFooter(doc.getNumberOfPages());
-        doc.addPage();
-        currentY = margin;
-      }
-    };
+        const totalPages = Math.ceil(imgHeight / pageHeight);
+        const canvas = document.createElement('canvas');
+        const ctx = canvas.getContext('2d');
 
-    // Render array of objects as a table
-    const renderTable = (title, dataList) => {
-      if (!Array.isArray(dataList) || dataList.length === 0) return;
+        canvas.width = img.width;
+        canvas.height = (pageHeight * img.width) / pageWidth; // Convert mm to pixels
 
-      addSectionTitle(title);
+        for (let i = 0; i < totalPages; i++) {
+          ctx.clearRect(0, 0, canvas.width, canvas.height);
+          ctx.drawImage(
+            img,
+            0,
+            i * canvas.height,
+            canvas.width,
+            canvas.height,
+            0,
+            0,
+            canvas.width,
+            canvas.height
+          );
 
-      // Extract all column headers
-      const columns = Array.from(
-        new Set(dataList.flatMap(item => Object.keys(item)))
-      );
+          const chunkData = canvas.toDataURL('image/png');
 
-      const tableStartX = margin;
-      const tableWidth = pageWidth - margin * 2;
-      const colWidth = tableWidth / columns.length;
+          if (i > 0) pdf.addPage();
+          pdf.addImage(chunkData, 'PNG', 0, 0, pageWidth, pageHeight);
+        }
 
-      // Header row
-      doc.setFont('helvetica', 'bold');
-      doc.setFillColor(220, 220, 220);
-      doc.rect(tableStartX, currentY - 12, tableWidth, 20, 'F');
-
-      columns.forEach((col, i) => {
-        doc.text(col.charAt(0).toUpperCase() + col.slice(1), tableStartX + i * colWidth + 5, currentY);
-      });
-      currentY += 20;
-
-      doc.setFont('helvetica', 'normal');
-
-      dataList.forEach((item) => {
-        checkAddPage(20);
-        columns.forEach((col, i) => {
-          const text = item[col] !== undefined ? String(item[col]) : '';
-          const splitText = doc.splitTextToSize(text, colWidth - 10);
-          doc.text(splitText, tableStartX + i * colWidth + 5, currentY);
-        });
-        currentY += 18;
-      });
-
-      currentY += 10;
-    };
-
-    // Document title
-    doc.setFontSize(22);
-    doc.setFont('helvetica', 'bold');
-    doc.setTextColor('#004080');
-    doc.text('Investor Dashboard Report', pageWidth / 2, currentY, { align: 'center' });
-    currentY += 30;
-
-    // Render all sections as tables if possible
-    renderTable('Investors List', jsonData.investors);
-    renderTable('Project Details', jsonData.projects);
-    renderTable('Products', jsonData.products);
-    renderTable('Investment Details', jsonData.investment);
-    renderTable('Proposed Financing', jsonData.proposedFinancing);
-    renderTable('Manpower Stats', jsonData.manpower);
-    renderTable('Remittance Details', jsonData.remittances);
-    renderTable('Implementation Programs', jsonData.implementationPrograms);
-    renderTable('Contact Details', jsonData.contacts);
-    renderTable('Declaration Details', jsonData.declarations);
-
-    addFooter(doc.getNumberOfPages());
-
-    doc.save('Investor_Report.pdf');
+        pdf.save('Investor_Report_Visual.pdf');
+      };
+    }).catch((error) => {
+      console.error('PDF generation error:', error);
+    });
   };
 
   if (!jsonData) {
@@ -150,7 +96,10 @@ function App() {
         </button>
       </div>
 
-      <div className="space-y-8 bg-white p-6 rounded shadow-lg">
+      <div
+        className="space-y-8 bg-white p-6 rounded shadow-lg"
+        ref={pdfRef} // Reference for PDF content
+      >
         <h1 className="text-3xl font-bold text-center mb-6">Investor Dashboard</h1>
         <InvestorsList data={jsonData.investors} />
         <ProjectDetails data={jsonData.projects} />
@@ -168,4 +117,3 @@ function App() {
 }
 
 export default App;
-
