@@ -1,4 +1,4 @@
-{
+ {
   "typeOfTourismProjects": {
     "tourismProjectType": ["Resort Head", "Villa"],
     "noRoom": 50,
@@ -38,7 +38,30 @@
       "cfax": "+1 (617) 555-0301",
       "ceml": "robert.chen@abcinvestments.com"
     }
-     
+  ],
+  "siteLocations": [
+    {
+      "facadD1": "123 Main St",
+      "facadD2": "Suite 400",
+      "facadD3": "Building A",
+      "factel": "+1-555-123-4567",
+      "factlx": "+1-555-765-4321",
+      "facfax": "+1-555-987-6543",
+      "faceml": "info@facility.com",
+      "lndacr": 10.5,
+      "lndrood": 8.2,
+      "lndpurch": 5.0,
+      "facprvcd": "PRV123",
+      "facdistcd": "DST456",
+      "facagacd": "AGC789",
+      "longitude": "72.8777",
+      "latitude": "19.0760",
+      "ownership": "Private",
+      "numberOfUnits": "20",
+      "offSiteInfrastructure": "Road access, power supply",
+      "onSiteInfrastructure": "Warehouse, office buildings",
+      "coveredSpace": 15000,
+      "existingBuildings": "3 warehouses, 1 admin block"
+    }
   ]
- 
 }
