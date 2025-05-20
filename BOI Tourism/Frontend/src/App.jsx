@@ -1,4 +1,4 @@
-import React from "react";
+  import React from "react";
 import TourismProject from "./components/TourismProject";
  
 import DeclarationForm from "./components/DeclarationForm";
@@ -42,4 +42,4 @@ function App() {
   );
 }
 
-export default App;
+export default App; 

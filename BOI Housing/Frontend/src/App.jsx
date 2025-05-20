@@ -1,6 +1,11 @@
+<<<<<<< HEAD
 import React, { useState, useEffect } from 'react';
 import { jsPDF } from 'jspdf';
 import autoTable from 'jspdf-autotable';
+=======
+ import { useState, useEffect } from 'react';
+import React from 'react';
+>>>>>>> main
 import SiteLocationsForm from './components/SiteLocationsForm';
 import EquipmentTable from './components/EquipmentTable';
 import WaterConsumptionTable from './components/WaterConsumptionTable';
@@ -256,4 +261,4 @@ if (data.investorList?.length) {
   );
 }
 
-export default App;
+export default App; 
