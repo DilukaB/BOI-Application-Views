@@ -70,6 +70,25 @@
             "eqppwr": "string",
             "eqpcap": "string",
             "equval": 0
+        },
+        {
+            "eqpdes": "string",
+            "eqpcnd": "string",
+            "eqppwr": "string",
+            "eqpcap": "string",
+            "equval": 0
         }
-    ]
+    ],
+   "waterConsumptions": [
+    {
+      "useOfWater": "Construction Use",
+      "commenceProduction": 1200,
+      "waterCapacity": 2000
+    },
+    {
+      "useOfWater": "Domestic Requirements",
+      "commenceProduction": 800,
+      "waterCapacity": 1500
+    }
+]
 }

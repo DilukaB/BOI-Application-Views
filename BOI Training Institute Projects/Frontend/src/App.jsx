@@ -1,6 +1,7 @@
  import React from "react"
 import LocationForm from "./components/LocationForm"
 import EquipmentTable from "./components/EquipmentTable"
+import WaterConsumptionTable from "./components/WaterConsumptionTable"
 
 
 function App() {
@@ -10,6 +11,7 @@ function App() {
     <>
       <LocationForm/>
       <EquipmentTable/>
+      <WaterConsumptionTable/>
     </>
   )
 }

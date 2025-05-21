@@ -1,6 +1,15 @@
-import React from 'react';
+ import React, { useEffect, useState } from 'react';
 
-const EquipmentTable = ({ equipmentList = [] }) => {
+const EquipmentTable = () => {
+    const [equipmentList, setEquipmentList] = useState([]);
+
+    useEffect(() => {
+        fetch('/data.json')
+            .then((response) => response.json())
+            .then((data) => setEquipmentList(data.equipmentList))
+            .catch((error) => console.error('Error fetching equipment data:', error));
+    }, []);
+
     return (
         <div className="p-6 bg-white shadow-lg rounded-lg">
             <h2 className="text-2xl font-semibold text-gray-800 mb-6">
