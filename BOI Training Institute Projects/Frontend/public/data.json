@@ -90,5 +90,26 @@
       "commenceProduction": 800,
       "waterCapacity": 1500
     }
-]
+],
+"fireRiskList": [
+    {
+      "fireRiskDescription": "string"
+    },
+    {
+      "fireRiskDescription": "string"
+    }
+  ],
+    "electricityList": [
+    {
+      "erCode": "Power (KVA)",
+      "commenceProduction": "50",
+      "erCapacity": "120"
+    },
+    {
+      "erCode": "Energy (Kwh)",
+      "commenceProduction": "1000",
+      "erCapacity": "3000"
+    }
+  
+    ]
 }
