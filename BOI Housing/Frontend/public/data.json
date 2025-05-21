@@ -139,13 +139,28 @@
         }
     ],
     "solidWasteList": [
-        {
-            "swsno": "string",
-            "swNature": "string",
-            "swqty": 4,
-            "swTreatment": "string",
-            "swDisMode": "string"
-        }
+    {
+      "swsno": "1",
+      "swNature": "Domestic waste",
+      "swqty": 4,
+      "swTreatment": "Incineration",
+      "swDisMode": "Municipal disposal"
+    },
+    {
+      "swsno": "2",
+      "swNature": "Waste drugs",
+      "swqty": 1.2,
+      "swTreatment": "Chemical Neutralization",
+      "swDisMode": "Bio-medical waste bin"
+    },
+    {
+      "swsno": "3",
+      "swNature": "Chemical waste",
+      "swqty": 3.5,
+      "swTreatment": "Encapsulation",
+      "swDisMode": "Authorized TSDF"
+    }
+  
     ],
     "wasteWaterList": [
         {

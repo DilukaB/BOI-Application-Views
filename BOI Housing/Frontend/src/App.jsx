@@ -10,6 +10,8 @@ import InvestorTable from './components/InvestorTable';
 import InvestmentDocumentChecklist from './components/InvestmentDocumentChecklist';
 import AnnexureIIForm from './components/AnnexureIIForm';
 import NoiseDescriptionComponent from './components/NoiseDescriptionComponent';
+import SolidWaste from './components/SolidWaste';
+ 
 
 function App() {
   const [locationsData, setLocationsData] = useState(null);
@@ -288,6 +290,8 @@ Thank you for your cooperation.
       <InvestorTable investorList={locationsData.investorList || []} />
       <InvestmentDocumentChecklist />
       <AnnexureIIForm />
+      <SolidWaste/>
+       
     </div>
   );
 }
