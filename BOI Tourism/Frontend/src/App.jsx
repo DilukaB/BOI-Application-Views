@@ -4,6 +4,8 @@ import autoTable from "jspdf-autotable";
 import TourismProject from "./components/TourismProject";
 import DeclarationForm from "./components/DeclarationForm";
 import LocationForm from "./components/LocationForm";
+ 
+
 
 function App() {
   const [formData, setFormData] = useState(null);
