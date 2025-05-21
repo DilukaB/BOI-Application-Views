@@ -75,41 +75,122 @@ function App() {
   doc.text(`3) Expected Star Classification: ${starsCount} Star`, margin, y);
   y += lineSpacing + 4;
 
-  // === 2. Location Details ===
+   // === 2. Location Details ===
   const loc = formData.siteLocations[0];
   doc.setFontSize(sectionFontSize);
-  doc.text("4). Location Details", margin, y);
-  y += 4;
+  doc.setTextColor(0);
+  doc.text("4). Location", margin, y);
+  y += lineSpacing + 4;
 
-  autoTable(doc, {
-    startY: y,
-    margin: { left: margin, right: margin },
-    styles: { fontSize: 8, cellPadding: 2 },
-    theme: "grid",
-    body: [
-      ["Address Line 1", loc.facadD1],
-      ["Address Line 2", loc.facadD2],
-      ["Address Line 3", loc.facadD3],
-      ["Telephone", loc.factel],
-      ["Fax", loc.facfax],
-      ["Email", loc.faceml],
-      ["Land Area (Acres)", loc.lndacr],
-      ["Road Frontage (ft)", loc.lndrood],
-      ["Land Purchased (Acres)", loc.lndpurch],
-      ["Province Code", loc.facprvcd],
-      ["District Code", loc.facdistcd],
-      ["AGA Division Code", loc.facagacd],
-      ["Longitude", loc.longitude],
-      ["Latitude", loc.latitude],
-      ["Ownership", loc.ownership],
-      ["No. of Units", loc.numberOfUnits],
-      ["Off-Site Infrastructure", loc.offSiteInfrastructure],
-      ["On-Site Infrastructure", loc.onSiteInfrastructure],
-      ["Total Covered Space (sq.ft)", loc.coveredSpace],
-      ["Existing Buildings", loc.existingBuildings],
-    ],
-  });
-  y = doc.lastAutoTable.finalY + 6;
+  // 1.1 Address of Location
+  doc.setFontSize(bodyFontSize);
+  doc.text("1.1 Address of Location (Please attach a sketch):", margin, y);
+  y += lineSpacing;
+
+  // Address lines
+  doc.text(loc.facadD1 || "N/A", margin, y);
+  y += lineSpacing;
+  doc.text(loc.facadD2 || "N/A", margin, y);
+  y += lineSpacing;
+  doc.text(loc.facadD3 || "N/A", margin, y);
+  y += lineSpacing;
+
+  // Horizontal line to separate address from next section
+  doc.setLineWidth(0.5); // Thin line
+  doc.line(margin, y, pageWidth - margin, y);
+  y += lineSpacing + 4;
+
+  // Reset line width to default
+  doc.setLineWidth(0.2);
+
+  // 1.2 Location details of the project
+  doc.setFontSize(sectionFontSize);
+  doc.text("1.2 Location details of the project:", margin, y);
+  y += lineSpacing + 4;
+
+  // Extent of land
+  doc.setFontSize(bodyFontSize);
+  doc.text("1.2.1 Extent of land (in acres):", margin, y);
+  doc.text(`${loc.lndacr || "N/A"}`, pageWidth - 80, y); // Right-aligned
+  y += lineSpacing;
+
+  // Districts and Division
+  doc.text("1.2.2 Districts: ", margin, y);
+  doc.text(`${loc.facdistcd || "N/A"}`, pageWidth - 80, y); // Right-aligned
+  y += lineSpacing;
+  doc.text("D S Division: ", margin, y);
+  doc.text(`${loc.facagacd || "N/A"}`, pageWidth - 80, y); // Right-aligned
+  y += lineSpacing + 4;
+
+  // Whether land is already procured
+  doc.text("1.2.3 Whether land is already procured, if so please submit a copy of the deed", margin, y);
+  y += lineSpacing;
+  doc.text("- If sale agreement is signed, please submit a copy of the agreement", margin + 4, y);
+  y += lineSpacing;
+  doc.text("- If the land is obtained on lease basis, submit a copy of the lease", margin + 4, y);
+  y += lineSpacing + 4;
+
+  // 1.3 Ownership of the land/lands
+  doc.setFontSize(sectionFontSize);
+  doc.text("1.3 Ownership of the land/lands:", margin, y);
+  y += lineSpacing + 4;
+
+  // Checkbox for Private and State
+  doc.setFontSize(bodyFontSize);
+  const checkboxSize = 6; // Size of the checkbox
+  const checkboxMarginRight = 10; // Distance between text and checkbox
+  const labelWidth = 50; // Width reserved for the text labels
+
+  // Private checkbox
+  doc.text("Private", margin, y); // Text aligned to the left
+  doc.rect(margin + labelWidth + checkboxMarginRight, y - 2, checkboxSize, checkboxSize); // Draw checkbox
+  if (loc.ownership === "Private") {
+    // Draw an X inside the checkbox
+    doc.line(
+      margin + labelWidth + checkboxMarginRight + 1,
+      y - 1,
+      margin + labelWidth + checkboxMarginRight + 5,
+      y + 3
+    ); // Diagonal line 1
+    doc.line(
+      margin + labelWidth + checkboxMarginRight + 5,
+      y - 1,
+      margin + labelWidth + checkboxMarginRight + 1,
+      y + 3
+    ); // Diagonal line 2
+  }
+  y += lineSpacing;
+
+  // State checkbox
+  doc.text("State", margin, y); // Text aligned to the left
+  doc.rect(margin + labelWidth + checkboxMarginRight, y - 2, checkboxSize, checkboxSize); // Draw checkbox
+  if (loc.ownership === "State") {
+    // Draw an X inside the checkbox
+    doc.line(
+      margin + labelWidth + checkboxMarginRight + 1,
+      y - 1,
+      margin + labelWidth + checkboxMarginRight + 5,
+      y + 3
+    ); // Diagonal line 1
+    doc.line(
+      margin + labelWidth + checkboxMarginRight + 5,
+      y - 1,
+      margin + labelWidth + checkboxMarginRight + 1,
+      y + 3
+    ); // Diagonal line 2
+  }
+  doc.text("(Please specify):", margin + labelWidth + checkboxMarginRight + checkboxSize + 10, y); // Text after the checkbox
+  y += lineSpacing + 4;
+
+  // 1.4 Covered space of buildings
+  doc.setFontSize(sectionFontSize);
+  doc.text("1.4 Covered space of buildings (in sq.ft / sq. meters):", margin, y);
+  y += lineSpacing + 4;
+
+  // Covered space
+  doc.setFontSize(bodyFontSize);
+  doc.text(`${loc.coveredSpace || "N/A"}`, margin, y);
+  y += lineSpacing + 4;
 
   // === 3. Declarations Table ===
 doc.setFontSize(sectionFontSize);
