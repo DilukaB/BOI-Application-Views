@@ -1,8 +1,9 @@
  {
   "typeOfTourismProjects": {
-    "tourismProjectType": ["Resort Head", "Villa"],
+    "tourismProjectType": ["Resort Hotel", "Villas"],
     "noRoom": 50,
     "expectedStar": 4
+  
   },
   "declarations": [
     {
