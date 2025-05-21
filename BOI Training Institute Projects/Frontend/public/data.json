@@ -45,29 +45,8 @@
       "onSiteInfrastructure": "Production units",
       "coveredSpace": 20000,
       "existingBuildings": "2 production halls, 1 control room"
-    },
-    {
-      "facadD1": "456 Another St",
-      "facadD2": "Floor 2",
-      "facadD3": "Building B",
-      "factel": "+1-555-111-2222",
-      "factlx": "+1-555-333-4444",
-      "facfax": "+1-555-555-6666",
-      "faceml": "contact@newfacility.com",
-      "lndacr": 12.0,
-      "lndrood": 9.0,
-      "lndpurch": 6.0,
-      "facprvcd": "PRV456",
-      "facdistcd": "DST789",
-      "facagacd": "AGC012",
-      "longitude": "73.0000",
-      "latitude": "19.1000",
-      "ownership": "Public",
-      "numberOfUnits": "30",
-      "offSiteInfrastructure": "Water, electricity",
-      "onSiteInfrastructure": "Production units",
-      "coveredSpace": 20000,
-      "existingBuildings": "2 production halls, 1 control room"
     }
+    
+  
   ]
 }

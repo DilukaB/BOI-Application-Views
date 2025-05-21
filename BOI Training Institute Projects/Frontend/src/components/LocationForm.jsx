@@ -7,39 +7,43 @@ const LocationForm = () => {
     fetch("/data.json")
       .then((res) => res.json())
       .then((data) => {
-        if (data.siteLocations && data.siteLocations.length > 0) {
-          setLocations(data.siteLocations); // Set all locations
+        if (data.siteLocations?.length > 0) {
+          setLocations(data.siteLocations);
         }
       })
       .catch((err) => console.error("Error fetching location:", err));
   }, []);
 
   if (locations.length === 0) {
-    return <p className="text-center text-gray-600">Loading location data....</p>;
+    return (
+      <div className="flex justify-center py-20">
+        <p className="text-lg font-medium text-gray-500 animate-pulse">Loading location data...</p>
+      </div>
+    );
   }
 
   return (
-    <div className="space-y-12 text-gray-800">
-      <h2 className="text-2xl font-bold underline underline-offset-4 text-gray-900 mb-4">
-        4). Location
+    <div className="max-w-6xl mx-auto px-6 py-12 text-slate-800">
+      <h2 className="text-3xl font-bold text-slate-900 mb-10 border-b pb-4 border-slate-300 tracking-wide">
+        Section 4: Project Location Details
       </h2>
 
       {locations.map((location, index) => (
         <div
           key={index}
-          className="space-y-8 border-t pt-6"
+          className="bg-white border border-slate-300 rounded-xl shadow-sm mb-12 p-8 space-y-8"
         >
-          <h3 className="text-xl font-semibold text-gray-700">Location #{index + 1}</h3>
+          <h3 className="text-xl font-semibold text-indigo-800">Location #{index + 1}</h3>
 
           {/* Address */}
           <section>
-            <p className="font-semibold">
+            <p className="font-semibold text-slate-700">
               1.1 Address of Location{" "}
-              <span className="font-normal text-sm">(Please attach a sketch)</span>:
+              <span className="text-sm font-normal text-gray-500">(Please attach a sketch)</span>
             </p>
-            <div className="mt-3 space-y-2 text-gray-700">
-              <div className="border-b border-gray-400 pb-1">{location.facadD1}</div>
-              <div className="border-b border-gray-400 pb-1">
+            <div className="mt-2 text-gray-800 pl-4 space-y-1">
+              <div className="border-b border-gray-300 pb-1">{location.facadD1}</div>
+              <div className="border-b border-gray-300 pb-1">
                 {location.facadD2}, {location.facadD3}
               </div>
             </div>
@@ -47,26 +51,25 @@ const LocationForm = () => {
 
           {/* Location Details */}
           <section>
-            <p className="font-semibold mb-2">1.2 Location details of the project:</p>
-            <div className="ml-6 space-y-3 text-gray-700">
+            <p className="font-semibold text-slate-700 mb-2">1.2 Location Details:</p>
+            <div className="pl-4 space-y-3">
               <p>
-                <strong>1.2.1</strong> Extent of land (in acres):
-                <span className="ml-2 font-medium">{location.lndacr}</span>
+                <strong className="text-gray-700">1.2.1</strong> Extent of Land (in acres):{" "}
+                <span className="font-medium text-blue-900">{location.lndacr}</span>
               </p>
-
               <p>
-                <strong>1.2.2</strong> Districts:
-                <span className="ml-2 font-medium">{location.facdistcd}</span>
-                <span className="ml-4">D S Division:
-                  <span className="ml-2 font-medium">{location.facagacd}</span>
+                <strong className="text-gray-700">1.2.2</strong> District:{" "}
+                <span className="font-medium text-blue-900">{location.facdistcd}</span>
+                <span className="ml-6">DS Division:{" "}
+                  <span className="font-medium text-blue-900">{location.facagacd}</span>
                 </span>
               </p>
-
-              <div className="text-sm text-gray-600">
-                <p><strong>1.2.3</strong> Whether land is already procured, if so please submit a copy of the deed</p>
-                <ul className="list-disc ml-6 mt-1 space-y-1">
-                  <li>If sale agreement is signed, please submit a copy of the agreement</li>
-                  <li>If the land is obtained on lease basis, submit a copy of the lease</li>
+              <div className="text-sm text-gray-600 mt-2">
+                <p className="mb-1"><strong>1.2.3</strong> Land Procurement Status:</p>
+                <ul className="list-disc ml-6 space-y-1">
+                  <li>If land is procured, submit a copy of the deed.</li>
+                  <li>If a sale agreement is signed, submit a copy.</li>
+                  <li>If land is leased, attach the lease document.</li>
                 </ul>
               </div>
             </div>
@@ -74,24 +77,20 @@ const LocationForm = () => {
 
           {/* Ownership */}
           <section>
-            <p className="font-semibold">1.3 Ownership of the land/lands:</p>
-            <div className="flex flex-wrap gap-x-8 gap-y-2 ml-6 mt-3 text-gray-700">
+            <p className="font-semibold text-slate-700">1.3 Land Ownership:</p>
+            <div className="flex flex-wrap items-start gap-8 mt-3 pl-4 text-gray-800">
+              {["Private", "State"].map((type) => (
+                <label key={type} className="flex items-center gap-2">
+                  <span className={`w-5 h-5 border border-gray-600 rounded-sm flex items-center justify-center bg-gray-100 text-green-700 font-semibold`}>
+                    {location.ownership === type ? "✔" : ""}
+                  </span>
+                  {type}
+                </label>
+              ))}
               <label className="flex items-center gap-2">
-                <span className="w-5 h-5 border border-gray-600 flex items-center justify-center bg-gray-100 text-sm">
-                  {location.ownership === "Private" ? "✔" : ""}
-                </span>{" "}
-                Private
-              </label>
-              <label className="flex items-center gap-2">
-                <span className="w-5 h-5 border border-gray-600 flex items-center justify-center bg-gray-100 text-sm">
-                  {location.ownership === "State" ? "✔" : ""}
-                </span>{" "}
-                State
-              </label>
-              <label className="flex items-center gap-2">
-                (Please specify):
-                <span className="border-b border-gray-600 w-48 inline-block font-medium">
-                  {location.ownership !== "Private" && location.ownership !== "State" ? location.ownership : ""}
+                Other (Specify):
+                <span className="border-b border-gray-600 min-w-[220px] font-medium">
+                  {["Private", "State"].includes(location.ownership) ? "" : location.ownership}
                 </span>
               </label>
             </div>
@@ -99,11 +98,11 @@ const LocationForm = () => {
 
           {/* Covered space */}
           <section>
-            <p className="font-semibold">
-              1.4 Covered space of buildings{" "}
-              <span className="font-normal text-sm">(in sq.ft / sq. meters)</span>:
+            <p className="font-semibold text-slate-700">
+              1.4 Covered Space of Buildings{" "}
+              <span className="text-sm font-normal text-gray-500">(sq.ft / sq.m)</span>:
             </p>
-            <div className="w-64 mt-2 border-b border-gray-600 pb-1 text-gray-700 font-medium">
+            <div className="mt-2 pl-4 border-b border-gray-400 text-lg font-semibold text-blue-800 w-fit">
               {location.coveredSpace}
             </div>
           </section>
