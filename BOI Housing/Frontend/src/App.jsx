@@ -284,13 +284,14 @@ Thank you for your cooperation.
       <SiteLocationsForm siteLocations={locationsData.siteLocations || []} />
       <EquipmentTable equipmentList={locationsData.equipmentList || []} />
       <WaterConsumptionTable waterConsumptions={locationsData.waterConsumptions || []} />
+        <SolidWaste/>
       <NoiseDescriptionComponent />
       <ElectricityTable electricityList={locationsData.electricityList || []} />
       <ContactOfficerTable contactOfficerList={locationsData.contactOfficerList || []} />
       <InvestorTable investorList={locationsData.investorList || []} />
       <InvestmentDocumentChecklist />
       <AnnexureIIForm />
-      <SolidWaste/>
+    
        
     </div>
   );
