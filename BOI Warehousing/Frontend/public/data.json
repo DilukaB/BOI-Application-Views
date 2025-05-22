@@ -48,5 +48,17 @@
       "swTreatment": "Composting",
       "swDisMode": "Used on-site"
     }
+  ],
+  "sewageList": [
+    {
+      "swNatureOfEffluent": "From construction use",
+      "swTreatment": "Biological Treatment",
+      "swMethDisposal": "River Discharge"
+    },
+    {
+      "swNatureOfEffluent": "From human use",
+      "swTreatment": "Septic Tank",
+      "swMethDisposal": "Soak Pit"
+    }
   ]
 }
