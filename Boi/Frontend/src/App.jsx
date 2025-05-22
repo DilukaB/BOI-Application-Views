@@ -61,67 +61,85 @@ function App() {
   doc.text('Investor Dashboard', 105, currentY, { align: 'center' });
   currentY += 20;
 
-  // --- Investors List Section ---
-  ensureSpace(15);
-  addSectionHeader('Particulars of Investors', currentY, sectionNumber++);
-  currentY += 10;
+  // Define the position for values relative to the keys
+  const valueXPosition = 42; 
 
-  jsonData.investors.forEach((inv, index) => {
+  // Define the left margin
+  const leftMargin = 20;
+
+// --- Investors List Section ---
+ensureSpace(15);
+addSectionHeader('Particulars of Investors', currentY, sectionNumber++);
+currentY += 10;
+
+jsonData.investors.forEach((inv, index) => {
     ensureSpace(60);
     doc.setFontSize(11);
     doc.setFont('helvetica', 'bold');
-    doc.text(`Investor ${index + 1}:`, 10, currentY);
+    doc.text(`Investor ${index + 1}:`, leftMargin, currentY); // Use leftMargin for labels
     doc.setFont('helvetica', 'normal');
-    doc.text(inv.shdname || 'N/A', 50, currentY);
+    doc.text(inv.shdname || 'N/A', valueXPosition, currentY); // Normal font for value
     currentY += 8;
 
     doc.setFontSize(10);
     doc.setFont('helvetica', 'bold');
-    doc.text(`Equity Contribution: $${inv.equity}M | ${inv.eqtypct}%`, 10, currentY);
+    doc.text(`Equity Contribution: $${inv.equity}M | ${inv.eqtypct}%`, leftMargin + 120, currentY - 10); // Adjusted x and y
     currentY += 10;
 
-    addLabelValue('Citizenship:', inv.citizen || 'N/A', currentY); currentY += 8;
-    addLabelValue('ID/Passport:', inv.invtidno || 'N/A', currentY); currentY += 8;
+    // Increase the vertical gap here
+    currentY += -10;
+
+    // Bold the labels and keep values in normal font
+    addLabelValueBoldKey('Citizenship:', inv.citizen || 'N/A', currentY); currentY += 8;
+    addLabelValueBoldKey('ID/Passport:', inv.invtidno || 'N/A', currentY); currentY += 8;
 
     const address = [inv.shdadD1, inv.shdadD2, inv.shdadD3, inv.shdadD4].filter(Boolean).join(', ') || 'N/A';
-    addLabelValue('Address:', address, currentY); currentY += 10;
-    addLabelValue('Telephone:', inv.shdtel || '—', currentY); currentY += 8;
-    addLabelValue('Fax:', inv.shdfax || '—', currentY); currentY += 8;
-    addLabelValue('Email:', inv.shdeml || '—', currentY); currentY += 10;
+    addLabelValueBoldKey('Address:', address, currentY); currentY += 10;
+    addLabelValueBoldKey('Telephone:', inv.shdtel || '—', currentY); currentY += 8;
+    addLabelValueBoldKey('Fax:', inv.shdfax || '—', currentY); currentY += 8;
+    addLabelValueBoldKey('Email:', inv.shdeml || '—', currentY); currentY += 10;
 
     doc.setFont('helvetica', 'bold');
-    doc.text('Current Business Interests:', 10, currentY);
+    doc.text('Current Business Interests:', leftMargin, currentY); // Use leftMargin
     currentY += 6;
     doc.setFont('helvetica', 'normal');
     const businessLines = doc.splitTextToSize(inv.businessInterest || 'N/A', 180);
-    doc.text(businessLines, 15, currentY);
+    doc.text(businessLines, leftMargin + 5, currentY); // Indent values slightly
     currentY += businessLines.length * 6 + 4;
 
     doc.setFont('helvetica', 'bold');
-    doc.text('Previous BOI Projects:', 10, currentY);
+    doc.text('Previous BOI Projects:', leftMargin, currentY); // Use leftMargin
     currentY += 6;
     doc.setFont('helvetica', 'normal');
     const projectsLines = doc.splitTextToSize(inv.companyProfile || 'None', 180);
-    doc.text(projectsLines, 15, currentY);
+    doc.text(projectsLines, leftMargin + 5, currentY); // Indent values slightly
     currentY += projectsLines.length * 6 + 4;
 
     doc.setFont('helvetica', 'bold');
-    doc.text('Other BOI Interests:', 10, currentY);
+    doc.text('Other BOI Interests:', leftMargin, currentY); // Use leftMargin
     currentY += 6;
     doc.setFont('helvetica', 'normal');
     const otherInterestLines = doc.splitTextToSize(inv.interestProj || 'None', 180);
-    doc.text(otherInterestLines, 15, currentY);
+    doc.text(otherInterestLines, leftMargin + 5, currentY); // Indent values slightly
     currentY += otherInterestLines.length * 6 + 12;
-  });
+});
 
-  // --- Project Details Section ---
+// Helper function to add label-value pairs with bold keys
+function addLabelValueBoldKey(label, value, yPosition) {
+    doc.setFont('helvetica', 'bold');
+    doc.text(label, leftMargin, yPosition); 
+    doc.setFont('helvetica', 'normal');
+    doc.text(value, valueXPosition, yPosition); 
+}
+
+ // --- Project Details Section ---
   ensureSpace(30);
   addSectionHeader('Project Details', currentY, sectionNumber++);
   currentY += 10;
 
   const project = jsonData.projects[0] || {};
-  addLabelValue('Project Type:', project.projectType || 'N/A', currentY); currentY += 10;
-  addLabelValue('Description:', project.projectDes || 'N/A', currentY); currentY += 15;
+  addLabelValue('Project Type:', project.projectType || 'N/A', currentY, leftMargin, valueXPosition); currentY += 10;
+  addLabelValue('Description:', project.projectDes || 'N/A', currentY, leftMargin, valueXPosition); currentY += 15;
 
   // --- Marketing Programme Table Section ---
   ensureSpace(40);
@@ -278,10 +296,10 @@ function App() {
   currentY += 10;
 
   const declarationStatement = `I declare that the information furnished above in this application, attachments, and otherwise represented are true and correct, and I undertake to inform the BOI immediately if there is any change in the information provided.`;
-  const declarationLines = doc.splitTextToSize(declarationStatement, 180);
+  const declarationLines = doc.splitTextToSize(declarationStatement, 220);
   doc.setFont('helvetica', 'normal');
   doc.setFontSize(10);
-  doc.text(declarationLines, 10, currentY);
+  doc.text(declarationLines, 15, currentY);
   currentY += declarationLines.length * 6 + 10;
 
   const declarationBody = (jsonData.declarations || []).map((decl) => [
@@ -304,7 +322,7 @@ function App() {
       styles: { fontSize: 9, cellPadding: 2 },
       columnStyles: { 3: { cellWidth: 50 }, 6: { cellWidth: 40 } },
       didDrawPage: (data) => {
-        currentY = data.cursor.y + 10;
+        currentY = data.cursor.y + 20;
       }
     });
 
