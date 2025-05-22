@@ -56,21 +56,23 @@ const InvestorsDeclaration = () => {
         </table>
       </div>
 
-      <h3 className="mt-8 mb-3 text-base font-semibold text-gray-800">Signatures of Investors</h3>
-      <div className="space-y-3 text-sm text-gray-600">
+      <h3 className="mt-8 mb-4 text-base font-semibold text-gray-800">Signatures of Investors</h3>
+      <div className="space-y-6 text-sm text-gray-600">
         {declarations.map((item, index) => (
-          <div
-            key={item.investorID || index}
-            className="border-b border-dotted border-gray-400 w-72"
-          >
-            {item.cname}
+          <div key={item.investorID || index}>
+            <div className="mb-1 font-medium text-gray-800">{item.cname}</div>
+            <div className="flex items-center space-x-6">
+              <div>
+                <span className="text-gray-800 font-semibold mr-2">Signature:</span>
+                <span className="border-b border-dotted border-gray-400 inline-block w-64 h-5" />
+              </div>
+              <div>
+                <span className="text-gray-800 font-semibold mr-2">Date:</span>
+                <span className="border-b border-dotted border-gray-400 inline-block w-40 h-5" />
+              </div>
+            </div>
           </div>
         ))}
-      </div>
-
-      <div className="mt-8 text-sm">
-        <span className="font-semibold text-gray-800">Date:</span>
-        <span className="ml-3 border-b border-dotted border-gray-400 inline-block w-40" />
       </div>
     </div>
   );
