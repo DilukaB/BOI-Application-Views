@@ -20,7 +20,7 @@ const Sewage = () => {
         <table className="min-w-full table-auto border-collapse text-sm">
           <thead className="bg-gray-100 text-gray-700">
             <tr>
-              <th className="border border-gray-300 px-6 py-3 text-left">S.No</th>
+              <th className="border border-gray-300 px-6 py-3 text-left">No</th>
               <th className="border border-gray-300 px-6 py-3 text-left">Nature of Effluent</th>
               <th className="border border-gray-300 px-6 py-3 text-left">Treatment</th>
               <th className="border border-gray-300 px-6 py-3 text-left">Method of Disposal</th>
