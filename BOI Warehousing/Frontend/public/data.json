@@ -60,5 +60,43 @@
       "swTreatment": "Septic Tank",
       "swMethDisposal": "Soak Pit"
     }
-  ]
+  ],
+   "electricityList": [
+    {
+      "erCode": "Power (KVA)",
+      "commenceProduction": "50",
+      "erCapacity": "120"
+    },
+    {
+      "erCode": "Energy (Kwh)",
+      "commenceProduction": "1000",
+      "erCapacity": "3000"
+    }
+  
+    ],
+     "contactOfficerList": [
+    {
+      "cntname": "Jane Doe",
+      "cntAddress": "123 Main St, NY",
+      "cntTel": "+1-555-1234",
+      "cntEmail": "jane.doe@example.com",
+      "cntFax": "+1-555-5678"
+    },
+    {
+      "cntname": "John Smith",
+      "cntAddress": "456 Park Ave, CA",
+      "cntTel": "+1-555-9876",
+      "cntEmail": "john.smith@example.com",
+      "cntFax": "+1-555-4321"
+    }
+  ],
+   "declarations": [
+    {
+      "investorID": "1",
+      "cname": "Alice Fernando",
+      "ctel": "+94771234567",
+      "cfax": "+94112566789",
+      "ceml": "alice@domain.com"
+    }
+]
 }
