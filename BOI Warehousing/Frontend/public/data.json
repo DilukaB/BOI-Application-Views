@@ -1,0 +1,52 @@
+ {
+  "machineryLists": [
+    {
+      "machineDescription": "Excavator",
+      "horsePower": "200 HP",
+      "quantity": 2,
+      "condition": "Good",
+      "machineryValue": 50000
+    },
+    {
+      "machineDescription": "Bulldozer",
+      "horsePower": "150 HP",
+      "quantity": 1,
+      "condition": "Excellent",
+      "machineryValue": 75000
+    }
+  ],
+ "waterConsumptions": [
+    {
+      "useOfWater": "Process Use",
+      "commenceProduction": 1000,
+      "waterCapacity": 1500
+    },
+    {
+      "useOfWater": "Cooling purpose",
+      "commenceProduction": 800,
+      "waterCapacity": 1200
+    },
+    {
+      "useOfWater": "Human Use",
+      "commenceProduction": 300,
+      "waterCapacity": 500
+    }
+  
+],
+"solidWasteList": [
+    {
+      "swsno": "1",
+      "swNature": "Plastic Waste",
+      "swqty": 200,
+      "swTreatment": "Recycling",
+      "swDisMode": "Sold to vendor"
+    },
+    {
+      "swsno": "2",
+      "swNature": "Organic Waste",
+      "swqty": 500,
+      "swTreatment": "Composting",
+      "swDisMode": "Used on-site"
+    }
+  ]
+}
