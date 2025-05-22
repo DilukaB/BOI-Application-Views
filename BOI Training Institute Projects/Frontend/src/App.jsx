@@ -5,6 +5,7 @@ import WaterConsumptionTable from "./components/WaterConsumptionTable"
 import FireRisk from "./components/FireRisk"
 import ElectricityTable from "./components/ElectricityTable"
 import InvestorsDeclaration from "./components/InvestorsDeclaration"
+import ContactOfficer from "./components/ContactOfficer"
 
 
 function App() {
@@ -17,7 +18,9 @@ function App() {
       <WaterConsumptionTable/>
       <FireRisk/>
       <ElectricityTable/>
+      <ContactOfficer/>
       <InvestorsDeclaration/>
+      
     </>
   )
 }

@@ -121,5 +121,21 @@
       "ceml": "alice@domain.com"
     }
      
+  ],
+  "contactOfficerList": [
+    {
+      "cntname": "Jane Doe",
+      "cntAddress": "123 Main St, NY",
+      "cntTel": "+1-555-1234",
+      "cntEmail": "jane.doe@example.com",
+      "cntFax": "+1-555-5678"
+    },
+    {
+      "cntname": "John Smith",
+      "cntAddress": "456 Park Ave, CA",
+      "cntTel": "+1-555-9876",
+      "cntEmail": "john.smith@example.com",
+      "cntFax": "+1-555-4321"
+    }
   ]
 }
