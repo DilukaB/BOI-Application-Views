@@ -119,13 +119,7 @@
       "ctel": "+94771234567",
       "cfax": "+94112566789",
       "ceml": "alice@domain.com"
-    },
-    {
-      "investorID": "2",
-      "cname": "Bob Silva",
-      "ctel": "+94775554433",
-      "cfax": "+94113334444",
-      "ceml": "bob@domain.com"
     }
+     
   ]
 }
