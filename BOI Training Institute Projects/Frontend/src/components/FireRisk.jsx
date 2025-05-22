@@ -18,7 +18,7 @@ const FireRisk = () => {
     <div className="p-6 bg-white shadow-lg rounded-lg">
       <h2 className="text-2xl font-semibold text-gray-800 mb-4">
         <span className="font-bold">2.3 Fire Risk</span>{' '}
-        <span className="text-red-500">(Other details)</span>
+        <span className="text-red-500"></span>
       </h2>
 
       <p className="text-gray-700 mb-4 font-medium">

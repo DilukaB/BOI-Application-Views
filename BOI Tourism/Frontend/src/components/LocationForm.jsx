@@ -15,91 +15,116 @@ const LocationForm = () => {
   }, []);
 
   if (!location) {
-    return <p className="text-center text-gray-600">Loading location data....</p>;
+    return (
+      <div className="flex justify-center py-20">
+        <p className="text-lg font-medium text-gray-500 animate-pulse">
+          Loading location data...
+        </p>
+      </div>
+    );
   }
 
   return (
-    <div className="space-y-8 text-gray-800 text-[15px] leading-relaxed print:text-black print:bg-white print:p-0 print:shadow-none print:rounded-none">
-      <h2 className="text-2xl font-bold underline underline-offset-4 text-gray-900 mb-4">
-        4). Location
+    <div className="container mx-auto px-4 py-10 text-gray-800">
+      <h2 className="text-2xl font-semibold mb-8 text-gray-800 border-b pb-2">
+        Section 4: Project Location Details
       </h2>
 
-      {/* 1.1 Address */}
-      <section>
-        <p className="font-semibold">
-          1.1 Address of Location{" "}
-          <span className="font-normal text-sm">(Please attach a sketch)</span>:
-        </p>
-        <div className="mt-3 space-y-2 text-gray-700">
-          <div className="border-b border-gray-400 pb-1">{location.facadD1}</div>
-          <div className="border-b border-gray-400 pb-1">
-            {location.facadD2}, {location.facadD3}
+      <div className="border rounded-xl p-6 transition-all duration-300 border-gray-200 shadow-md hover:shadow-lg bg-white space-y-6">
+        <div className="flex justify-between items-start mb-4">
+          <div>
+            <h3 className="text-xl font-bold text-indigo-700">Location</h3>
+            <p className="text-sm text-gray-500 mt-1">Project Site</p>
           </div>
         </div>
-      </section>
 
-      {/* 1.2 Location Details */}
-      <section>
-        <p className="font-semibold mb-2">1.2 Location details of the project:</p>
-        <div className="ml-6 space-y-3 text-gray-700">
-          <p>
-            <strong>1.2.1</strong> Extent of land (in acres):
-            <span className="ml-2 font-medium">{location.lndacr}</span>
+        {/* Address */}
+        <div>
+          <h4 className="text-sm font-semibold text-gray-500 uppercase tracking-wider">
+            Address
+          </h4>
+          <p className="mt-1">
+            {[location.facadD1, location.facadD2, location.facadD3]
+              .filter(Boolean)
+              .join(", ")}
           </p>
+        </div>
 
-          <p>
-            <strong>1.2.2</strong> Districts:
-            <span className="ml-2 font-medium">{location.facdistcd}</span>
-            <span className="ml-4">D S Division:
-              <span className="ml-2 font-medium">{location.facagacd}</span>
-            </span>
-          </p>
+        {/* Extent of Land */}
+        <div>
+          <h4 className="text-sm font-semibold text-gray-500 uppercase tracking-wider">
+            Extent of Land (in acres)
+          </h4>
+          <p className="mt-1 text-blue-800 font-medium">{location.lndacr}</p>
+        </div>
 
-          <div className="text-sm text-gray-600">
-            <p><strong>1.2.3</strong> Whether land is already procured, if so please submit a copy of the deed</p>
-            <ul className="list-disc ml-6 mt-1 space-y-1">
-              <li>If sale agreement is signed, please submit a copy of the agreement</li>
-              <li>If the land is obtained on lease basis, submit a copy of the lease</li>
-            </ul>
+        {/* District and DS Division */}
+        <div className="grid grid-cols-2 gap-4">
+          <div>
+            <h4 className="text-sm font-semibold text-gray-500 uppercase tracking-wider">
+              District
+            </h4>
+            <p className="mt-1 text-blue-800 font-medium">{location.facdistcd}</p>
+          </div>
+          <div>
+            <h4 className="text-sm font-semibold text-gray-500 uppercase tracking-wider">
+              DS Division
+            </h4>
+            <p className="mt-1 text-blue-800 font-medium">{location.facagacd}</p>
           </div>
         </div>
-      </section>
 
-      {/* 1.3 Ownership */}
-      <section>
-        <p className="font-semibold">1.3 Ownership of the land/lands:</p>
-        <div className="flex flex-wrap gap-x-8 gap-y-2 ml-6 mt-3 text-gray-700">
-          <label className="flex items-center gap-2">
-            <span className="w-5 h-5 border border-gray-600 flex items-center justify-center bg-gray-100 text-sm">
-              {location.ownership === "Private" ? "✔" : ""}
-            </span>{" "}
-            Private
-          </label>
-          <label className="flex items-center gap-2">
-            <span className="w-5 h-5 border border-gray-600 flex items-center justify-center bg-gray-100 text-sm">
-              {location.ownership === "State" ? "✔" : ""}
-            </span>{" "}
-            State
-          </label>
-          <label className="flex items-center gap-2">
-            (Please specify):
-            <span className="border-b border-gray-600 w-48 inline-block font-medium">
-              {location.ownership !== "Private" && location.ownership !== "State" ? location.ownership : ""}
-            </span>
-          </label>
+        {/* Land Procurement Status */}
+        <div>
+          <h4 className="text-sm font-semibold text-gray-500 uppercase tracking-wider">
+            Land Procurement Status
+          </h4>
+          <ul className="list-disc list-inside mt-2 text-gray-700 text-sm space-y-1">
+            <li>If land is procured, submit a copy of the deed.</li>
+            <li>
+              If a sale agreement is signed, submit a copy of the agreement.
+            </li>
+            <li>
+              If land is leased, attach the lease document or MOU.
+            </li>
+          </ul>
         </div>
-      </section>
 
-      {/* 1.4 Covered space */}
-      <section>
-        <p className="font-semibold">
-          1.4 Covered space of buildings{" "}
-          <span className="font-normal text-sm">(in sq.ft / sq. meters)</span>:
-        </p>
-        <div className="w-64 mt-2 border-b border-gray-600 pb-1 text-gray-700 font-medium">
-          {location.coveredSpace}
+        {/* Ownership */}
+        <div>
+          <h4 className="text-sm font-semibold text-gray-500 uppercase tracking-wider">
+            Land Ownership
+          </h4>
+          <div className="mt-2 flex flex-wrap items-start gap-6 text-sm text-gray-700">
+            {["Private", "State"].map((type) => (
+              <label key={type} className="flex items-center gap-2">
+                <span className="w-5 h-5 border border-gray-400 rounded-sm flex items-center justify-center bg-gray-100 text-green-600 font-bold">
+                  {location.ownership === type ? "✔" : ""}
+                </span>
+                {type}
+              </label>
+            ))}
+            <label className="flex items-center gap-2">
+              Other (Specify):
+              <span className="border-b border-gray-400 min-w-[150px] font-medium">
+                {!["Private", "State"].includes(location.ownership)
+                  ? location.ownership
+                  : ""}
+              </span>
+            </label>
+          </div>
         </div>
-      </section>
+
+        {/* Covered Space */}
+        <div>
+          <h4 className="text-sm font-semibold text-gray-500 uppercase tracking-wider">
+            Covered Space of Buildings (sq.ft / sq.m)
+          </h4>
+          <p className="mt-1 text-blue-800 font-semibold">
+            {location.coveredSpace}
+          </p>
+        </div>
+      </div>
     </div>
   );
 };
