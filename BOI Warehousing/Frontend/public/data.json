@@ -32,5 +32,21 @@
       "waterCapacity": 500
     }
   
-]
+],
+"solidWasteList": [
+    {
+      "swsno": "1",
+      "swNature": "Plastic Waste",
+      "swqty": 200,
+      "swTreatment": "Recycling",
+      "swDisMode": "Sold to vendor"
+    },
+    {
+      "swsno": "2",
+      "swNature": "Organic Waste",
+      "swqty": 500,
+      "swTreatment": "Composting",
+      "swDisMode": "Used on-site"
+    }
+  ]
 }
