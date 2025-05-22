@@ -9,7 +9,7 @@ import InvestmentDocumentChecklist from './components/InvestmentDocumentChecklis
 import AnnexureIIForm from './components/AnnexureIIForm';
 import NoiseDescriptionComponent from './components/NoiseDescriptionComponent';
 import SolidWaste from './components/SolidWaste';
-import { generatePdf } from './pdfGenerator'; // Import the generatePdf function
+import { generatePdf } from './pdfGenerator';
 
 function App() {
   const [locationsData, setLocationsData] = useState(null);
