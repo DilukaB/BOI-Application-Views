@@ -61,6 +61,24 @@
       "swMethDisposal": "Soak Pit"
     }
   ],
+
+   "noiseList": [
+    {
+      "noiseCode": "NC001",
+      "niceDescription": [
+        { "description": "Compressor Machine" },
+        { "description": "Vibration Drill" }
+      ]
+    }
+  ],
+  "hazardousList": [
+    { "hazardousDes": "Hydrochloric Acid" },
+    { "hazardousDes": "Sodium Cyanide" }
+  ],
+  "fireRiskList": [
+    { "fireRiskDescription": "Paint Thinner Storage" },
+    { "fireRiskDescription": "Welding Operations" }
+  ],
    "electricityList": [
     {
       "erCode": "Power (KVA)",

@@ -6,6 +6,7 @@ import Sewage from "./components/Sewage"
 import ElectricityTable from "./components/ElectricityTable"
 import ContactOfficer from "./components/ContactOfficer"
 import InvestorsDeclaration from "./components/InvestorsDeclaration"
+import Noise_Hazardous_FireRisk from "./components/Noise_Hazardous_FireRisk"
  
 
  function App() {
@@ -17,9 +18,11 @@ import InvestorsDeclaration from "./components/InvestorsDeclaration"
       <WaterConsumptionTable/>
       <SolidWaste/>
       <Sewage/>
+       <Noise_Hazardous_FireRisk/>
       <ElectricityTable/>
       <ContactOfficer/>
       <InvestorsDeclaration/>
+     
 
     </>
   )
