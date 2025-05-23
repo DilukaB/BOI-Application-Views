@@ -1,0 +1,53 @@
+{
+  "fuelConsumptions": [
+    {
+      "eqpcd": "Electricity / Generator",
+      "noeqp": 2,
+      "plpermth": 100,
+      "dlpermth": 0,
+      "fulpermth": 0,
+      "klpermth": 50,
+      "biomas": 0,
+      "capacity": "20 kW"
+    }
+],
+ "wasteWaterList": [
+    {
+      "wwsno": "1",
+      "wwVolume": 100,
+      "wwTreatment": "Filtration",
+      "wwDisposalMode": "Drainage"
+    }
+  ],
+  "solidWasteList": [
+    {
+      "swsno": "1",
+      "swNature": "Plastic",
+      "swqty": 10,
+      "swTreatment": "Segregation",
+      "swDisMode": "Recycling"
+    }
+  ],
+  "airEmissionsDetails": [
+    {
+      "aEenvisagedSQNO": "Suspended Particulate Matter (PM)",
+      "aeMethodologyControl": "Dust collectors"
+    },
+    {
+      "aEenvisagedSQNO": "CO, CO2, SO3, Nitrogen Oxide",
+      "aeMethodologyControl": "Scrubbers and catalytic converters"
+    }
+  ],
+  "sewageList": [
+    {
+      "swNatureOfEffluent": "From construction use",
+      "swTreatment": "Settling tank",
+      "swMethDisposal": "Reuse for curing"
+    },
+    {
+      "swNatureOfEffluent": "From human use",
+      "swTreatment": "Septic tank",
+      "swMethDisposal": "Municipal drainage"
+    }
+  ]
+}
