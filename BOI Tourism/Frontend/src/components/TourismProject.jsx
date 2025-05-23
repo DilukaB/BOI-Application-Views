@@ -1,6 +1,6 @@
  import React, { useEffect, useState } from 'react';
 
-function TourismForm() {
+const TourismForm = () => {
   const [project, setProject] = useState(null);
 
   useEffect(() => {
@@ -12,7 +12,15 @@ function TourismForm() {
       .catch((err) => console.error('Failed to fetch data:', err));
   }, []);
 
-  if (!project) return <div>Loading...</div>;
+  if (!project) {
+    return (
+      <div className="flex justify-center py-20">
+        <p className="text-lg font-medium text-gray-500 animate-pulse">
+          Loading tourism project data...
+        </p>
+      </div>
+    );
+  }
 
   const projectTypes = [
     'Hotel',
@@ -27,41 +35,45 @@ function TourismForm() {
   ];
 
   return (
-    <div className="p-6 text-gray-900 space-y-6 text-[15px] font-serif">
-      {/* 1. Type of the Project */}
-      <div>
-        <p className="font-bold">1). Type of the Project</p>
-        <div className="grid grid-cols-3 gap-y-2 pl-4">
-          {projectTypes.map((type, index) => (
-            <label key={type} className="flex items-center gap-2">
-              <div className="w-4 h-4 border border-black flex items-center justify-center">
-                {project.tourismProjectType.includes(type) && (
-                  <div className="w-3 h-3 bg-black" />
-                )}
-              </div>
-              ({String.fromCharCode(97 + index)}) {type}
-            </label>
-          ))}
+    <div className="container mx-auto px-4 py-10 text-gray-800">
+      <h2 className="text-2xl font-semibold mb-8 text-gray-800 border-b pb-2">
+        Section 5: Tourism Project Details
+      </h2>
+
+      <div className="border rounded-xl p-6 transition-all duration-300 border-gray-200 shadow-md hover:shadow-lg bg-white space-y-6">
+        {/* 1. Type of the Project */}
+        <div>
+          <h3 className="text-lg font-bold text-indigo-700 mb-2">1). Type of the Project</h3>
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-y-2 pl-4 text-sm">
+            {projectTypes.map((type, index) => (
+              <label key={type} className="flex items-center gap-2">
+                <span className="w-5 h-5 border border-gray-500 flex items-center justify-center bg-gray-100 text-green-600 font-bold">
+                  {project.tourismProjectType.includes(type) ? "✔" : ""}
+                </span>
+                ({String.fromCharCode(97 + index)}) {type}
+              </label>
+            ))}
+          </div>
         </div>
-      </div>
 
-      {/* 2. No. of Rooms/villas/chalets */}
-      <div>
-        <p className="font-bold">
-          2). No. of Rooms/ villas/ chalets:
-          <span className="inline-block ml-4 border-b border-black w-32">{project.noRoom}</span>
-        </p>
-      </div>
+        {/* 2. No. of Rooms/villas/chalets */}
+        <div>
+          <h4 className="text-sm font-semibold text-gray-500 uppercase tracking-wider">
+            2). No. of Rooms / Villas / Chalets
+          </h4>
+          <p className="mt-1 text-blue-800 font-medium">{project.noRoom}</p>
+        </div>
 
-      {/* 3. Expected Star classification */}
-      <div>
-        <p className="font-bold">
-          3). Expected Star classification:
-          <span className="inline-block ml-4 border-b border-black w-16 text-center">{project.expectedStar} ★</span>
-        </p>
+        {/* 3. Expected Star classification */}
+        <div>
+          <h4 className="text-sm font-semibold text-gray-500 uppercase tracking-wider">
+            3). Expected Star Classification
+          </h4>
+          <p className="mt-1 text-blue-800 font-medium">{project.expectedStar} ★</p>
+        </div>
       </div>
     </div>
   );
-}
+};
 
 export default TourismForm;
