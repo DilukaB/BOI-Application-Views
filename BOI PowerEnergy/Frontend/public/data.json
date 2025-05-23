@@ -11,6 +11,23 @@
       "capacity": "20 kW"
     }
 ],
+"waterConsumptions": [
+    {
+      "useOfWater": "Construction Use",
+      "commenceProduction": 1000,
+      "waterCapacity": 1500
+    },
+    {
+      "useOfWater": "Domestic Requirements",
+      "commenceProduction": 800,
+      "waterCapacity": 1200
+    },
+    {
+      "useOfWater": "Cooling Purpose",
+      "commenceProduction": 600,
+      "waterCapacity": 900
+    }
+  ],
  "wasteWaterList": [
     {
       "wwsno": "1",
