@@ -1,35 +1,36 @@
  {
   "rawMaterials": [
     {
-      "itemDescription": "Steel",
-      "quantityPerMonth": 5000,
-      "unitPerMonth": "Kg",
+      "itemDescription": "Iron Ore",
+      "unitPerMonth": "kg",
+      "quantityPerMonth": 1000,
       "source": "Local"
     }
   ],
   "machineryLists": [
     {
       "machineDescription": "Lathe Machine",
-      "horsePower": 5,
+      "horsePower": "5 HP",
       "quantity": 2,
-      "condition": "New"
+      "condition": "New",
+      "machineryValue": 50000
     }
   ],
   "waterConsumptions": [
     {
       "useOfWater": "Process use",
-      "commenceProduction": 200,
-      "waterCapacity": 500
+      "commenceProduction": 1000,
+      "waterCapacity": 3000
     },
     {
-      "useOfWater": "Cooling purpose",
-      "commenceProduction": 150,
-      "waterCapacity": 400
+      "useOfWater": "Cooling Purpose",
+      "commenceProduction": 1000,
+      "waterCapacity": 3000
     },
     {
       "useOfWater": "Human Use",
-      "commenceProduction": 50,
-      "waterCapacity": 100
+      "commenceProduction": 1000,
+      "waterCapacity": 3000
     }
   ]
 }
