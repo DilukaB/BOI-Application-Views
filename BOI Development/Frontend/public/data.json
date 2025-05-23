@@ -32,5 +32,38 @@
       "commenceProduction": 1000,
       "waterCapacity": 3000
     }
+  ],
+  "solidWasteList": [
+    {
+      "swsno": "1",
+      "swNature": "Domestic waste",
+      "swqty": 25,
+      "swTreatment": "Composting",
+      "swDisMode": "Municipal collection"
+    }
+  ],
+  "sewageList": [
+    {
+      "swNatureOfEffluent": "From construction use",
+      "swTreatment": "Sedimentation",
+      "swMethDisposal": "Draining to soak pit"
+    },
+    {
+      "swNatureOfEffluent": "From human use",
+      "swTreatment": "Sedimentation",
+      "swMethDisposal": "Draining to soak pit"
+    }
+  ],
+  "electricityList": [
+    {
+      "erCode": "A. Power (kVA)",
+      "commenceProduction": 100,
+      "erCapacity": 250
+    },
+    {
+      "erCode": "B. Energy (kWH)",
+      "commenceProduction": 1500,
+      "erCapacity": 4000
+    }
   ]
 }

@@ -1,5 +1,6 @@
 import React from "react"
 import EnvironmentalExamination from "./components/EnvironmentalExamination"
+import EnvironmentalExamination_ii from "./components/EnvironmentalExamination_ii"
 
 function App() {
    
@@ -9,6 +10,7 @@ function App() {
       <>
 
 <EnvironmentalExamination/>
+<EnvironmentalExamination_ii/>
       
       </>
   )
