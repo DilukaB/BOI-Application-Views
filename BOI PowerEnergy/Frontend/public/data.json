@@ -66,5 +66,17 @@
       "swTreatment": "Septic tank",
       "swMethDisposal": "Municipal drainage"
     }
+  ],
+  "electricityList": [
+    {
+      "erCode": "During construction period",
+      "commenceProduction": 500,
+      "erCapacity": 700
+    },
+    {
+      "erCode": "Domestic requirement",
+      "commenceProduction": 300,
+      "erCapacity": 450
+    }
   ]
 }
