@@ -3,6 +3,8 @@ import FuelConsumptions from "./components/FuelConsumptions"
 import EnvironmentExamination from "./components/EnvironmentExamination"
 import WaterConsumption from "./components/WaterConsumption"
 import ElectricityTable from "./components/ElectricityTable"
+import ContactOfficer from "./components/ContactOfficer"
+import InvestorsDeclaration from "./components/InvestorsDeclaration"
 
 
 function App() {
@@ -14,6 +16,8 @@ function App() {
       <WaterConsumption/>
       <EnvironmentExamination/>
       <ElectricityTable/>
+      <ContactOfficer/>
+      <InvestorsDeclaration/>
       
     </>
   )
