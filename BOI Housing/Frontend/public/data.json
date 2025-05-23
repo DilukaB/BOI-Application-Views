@@ -71,7 +71,31 @@
             "onSiteInfrastructure": "Sewage system, internal roads, fencing",
             "coveredSpace": 12000,
             "existingBuildings": "Administration block, OPD, inpatient ward"
-          }
+          },
+          {
+  "facadD1": "Ministry of Health and Indigenous Medicine",
+  "facadD2": "Directorate of Hospital Services",
+  "facadD3": "Southern Provincial General Hospital",
+  "factel": "+94 81 4456789",
+  "factlx": "+94 81 9988776",
+  "facfax": "+94 81 3322110",
+  "faceml": "contact@southernhospital.lk",
+  "lndacr": 3.2,
+  "lndrood": 0.5,
+  "lndpurch": 18500000,
+  "facprvcd": "SP",
+  "facdistcd": "GA",
+  "facagacd": "AG014",
+  "longitude": "80.2206",
+  "latitude": "6.0535",
+  "ownership": "Semi-Government",
+  "numberOfUnits": "8",
+  "offSiteInfrastructure": "Main road access, public transport, high-voltage electricity",
+  "onSiteInfrastructure": "Water tank, parking area, security office",
+  "coveredSpace": 15500,
+  "existingBuildings": "Main hospital block, emergency unit, diagnostics center"
+}
+
           
     ],
     "equipmentList": [
