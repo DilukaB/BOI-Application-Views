@@ -3,8 +3,8 @@
 const InvestorTable = ({ investorList }) => {
   return (
     <div className="container mx-auto px-4 py-10 text-gray-800">
-      <h2 className="text-2xl font-semibold mb-8 text-gray-800 border-b pb-2">
-        Investor Information
+      <h2 className="text-2xl font-bold mb-2 text-indigo-800 border-b pb-2">
+       6) Investor's declaration & signature
       </h2>
 
       <p className="text-gray-600 text-sm mb-6 leading-relaxed border-l-4 border-blue-500 pl-4 italic">

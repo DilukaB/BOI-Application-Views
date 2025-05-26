@@ -3,8 +3,8 @@
 const EquipmentTable = ({ equipmentList = [] }) => {
   return (
     <div className="container mx-auto px-4 py-10 text-gray-800">
-      <h2 className="text-2xl font-semibold mb-8 text-gray-800 border-b pb-2">
-        Section 5: Equipment (Construction Related)
+      <h2 className="text-2xl font-bold mb-2 text-indigo-800 border-b pb-2">
+        2) Equipment  
       </h2>
 
       <div className="border rounded-xl p-6 transition-all duration-300 border-gray-200 shadow-md hover:shadow-lg bg-white space-y-6">

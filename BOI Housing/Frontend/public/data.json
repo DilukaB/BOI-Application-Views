@@ -130,6 +130,21 @@
             "machineryValue": 0
         }
     ],
+    "chemicalDetails": [
+    {
+      "chemicalName": "Sulfuric Acid",
+      "chPurpose": "pH adjustment",
+      "chuom": "L",
+      "chQuentity": 25
+    },
+    {
+      "chemicalName": "Sodium Hypochlorite",
+      "chPurpose": "Disinfection",
+      "chuom": "L",
+      "chQuentity": 40
+    }
+   
+  ],
     "rawMaterials": [
         {
             "itemDescription": "string",

@@ -13,9 +13,9 @@ const WaterConsumptionTable = ({ waterConsumptions }) => {
 
   return (
     <div className="container mx-auto px-4 py-10 text-gray-800">
-      <h2 className="text-2xl font-semibold mb-8 text-gray-800 border-b pb-2">
-        Section 3: Water Use (Liters/Day)
-      </h2>
+      <h3  className="text-lg font-semibold mt-4 mb-1">
+         3.2 Water Use (Liters/Day)
+      </h3>
 
       <div className="border rounded-xl p-6 transition-all duration-300 border-gray-200 shadow-md hover:shadow-lg bg-white space-y-6">
         <div className="overflow-x-auto">
