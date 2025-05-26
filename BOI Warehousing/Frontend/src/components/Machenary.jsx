@@ -6,7 +6,7 @@ const Machenary = () => {
   useEffect(() => {
     fetch('/data.json')
       .then((res) => res.json())
-      .then((data) => setMachinery(data.machineryLists || []))
+      .then((data) => setMachinery(data.equipmentList || []))
       .catch((err) => console.error('Error loading machinery data:', err));
   }, []);
 
@@ -33,8 +33,8 @@ const Machenary = () => {
               <tr>
                 <th className="border px-4 py-2 font-semibold">Item Description</th>
                 <th className="border px-4 py-2 font-semibold">Horse Power (HP)</th>
-                <th className="border px-4 py-2 font-semibold">Quantity</th>
-                <th className="border px-4 py-2 font-semibold">Condition</th>
+                <th className="border px-4 py-2 font-semibold">No of Items</th>
+                <th className="border px-4 py-2 font-semibold">Condition (used/new)</th>
                 <th className="border px-4 py-2 font-semibold">Value (USD)</th>
               </tr>
             </thead>
@@ -44,10 +44,10 @@ const Machenary = () => {
                   key={index}
                   className={`${index % 2 === 0 ? 'bg-gray-50' : 'bg-white'} hover:bg-indigo-50 transition`}
                 >
-                  <td className="border px-4 py-2 text-gray-800">{item.machineDescription}</td>
-                  <td className="border px-4 py-2 text-gray-700">{item.horsePower}</td>
-                  <td className="border px-4 py-2 text-gray-700">{item.quantity}</td>
-                  <td className="border px-4 py-2 text-gray-700">{item.condition}</td>
+                  <td className="border px-4 py-2 text-gray-800">{item.eqpdes}</td>
+                  <td className="border px-4 py-2 text-gray-700">{item.eqppwr}</td>
+                  <td className="border px-4 py-2 text-gray-700">{item.eqpcap}</td>
+                  <td className="border px-4 py-2 text-gray-700">{item.eqpcnd}</td>
                   <td className="border px-4 py-2 text-gray-700 font-medium">
                     ${item.machineryValue?.toLocaleString() ?? '0'}
                   </td>

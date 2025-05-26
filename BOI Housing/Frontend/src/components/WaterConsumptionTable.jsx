@@ -13,34 +13,41 @@ const WaterConsumptionTable = ({ waterConsumptions }) => {
 
   return (
     <div className="container mx-auto px-4 py-10 text-gray-800">
-      <h3  className="text-lg font-semibold mt-4 mb-1">
-         3.2 Water Use (Liters/Day)
-      </h3>
+      <div className="bg-white rounded-xl shadow-lg p-6">
+        <h3  className="text-lg font-semibold mt-4 mb-1">
+          3.2 Water Use (Liters/Day)
+        </h3>
+        <p className="italic text-sm text-gray-500 mb-4">
+          (Indicate water usage at various stages)
+        </p>
 
-      <div className="border rounded-xl p-6 transition-all duration-300 border-gray-200 shadow-md hover:shadow-lg bg-white space-y-6">
         <div className="overflow-x-auto">
-          <table className="min-w-full table-auto text-sm text-left text-gray-700">
-            <thead className="bg-gray-100 text-gray-600 uppercase text-xs tracking-wider">
+          <table className="min-w-full text-sm text-left border border-gray-300 rounded-lg overflow-hidden">
+            <thead className="bg-gray-100 text-gray-700 uppercase text-xs">
               <tr>
-                <th className="px-6 py-3 border border-gray-300 font-semibold text-left">Use of Water</th>
-                <th className="px-6 py-3 border border-gray-300 font-semibold text-center">At Commencement of Construction</th>
-                <th className="px-6 py-3 border border-gray-300 font-semibold text-center">At Capacity</th>
+                <th className="border px-4 py-2 font-semibold">Use of Water</th>
+                <th className="border px-4 py-2 font-semibold text-center">At Commencement of Construction</th>
+                <th className="border px-4 py-2 font-semibold text-center">At Capacity</th>
               </tr>
             </thead>
             <tbody>
               {waterConsumptions.map((item, index) => (
                 <tr
                   key={index}
-                  className={`border-t ${index % 2 === 0 ? 'bg-gray-50' : 'bg-white'} hover:bg-gray-100 transition duration-150`}
+                  className={`${index % 2 === 0 ? 'bg-gray-50' : 'bg-white'} hover:bg-indigo-50 transition`}
                 >
-                  <td className="px-6 py-4 border border-gray-200">{item.useOfWater}</td>
-                  <td className="px-6 py-4 border border-gray-200 text-center">{item.commenceProduction}</td>
-                  <td className="px-6 py-4 border border-gray-200 text-center">{item.waterCapacity}</td>
+                  <td className="border px-4 py-2">{item.useOfWater}</td>
+                  <td className="border px-4 py-2 text-center">{item.commenceProduction}</td>
+                  <td className="border px-4 py-2 text-center">{item.waterCapacity}</td>
                 </tr>
               ))}
             </tbody>
           </table>
         </div>
+
+        <p className="text-xs italic text-gray-500 mt-4">
+          Note: Provide separate figures for different stages of project lifecycle.
+        </p>
       </div>
     </div>
   );
