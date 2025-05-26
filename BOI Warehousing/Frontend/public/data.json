@@ -121,6 +121,15 @@
       "machineryValue": 75000
     }
   ],
+   "equipmentList": [
+    {
+      "eqpdes": "string",
+      "eqpcnd": "string",
+      "eqppwr": "string",
+      "eqpcap": "string",
+      "equval": 0
+    }
+  ],
   "chemicalDetails": [
     {
       "chemicalName": "Sulfuric Acid",
