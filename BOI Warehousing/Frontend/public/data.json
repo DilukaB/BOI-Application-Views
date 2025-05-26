@@ -121,6 +121,23 @@
       "machineryValue": 75000
     }
   ],
+  "chemicalDetails": [
+    {
+      "chemicalName": "Sulfuric Acid",
+      "chPurpose": "pH adjustment",
+      "chuom": "L",
+      "chQuentity": 25
+    },
+    {
+      "chemicalName": "Sodium Hypochlorite",
+      "chPurpose": "Disinfection",
+      "chuom": "L",
+      "chQuentity": 40
+    }
+   
+  ],
+
+ 
  "waterConsumptions": [
     {
       "useOfWater": "Process Use",

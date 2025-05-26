@@ -8,6 +8,7 @@ import ContactOfficer from "./components/ContactOfficer"
 import InvestorsDeclaration from "./components/InvestorsDeclaration"
 import Noise_Hazardous_FireRisk from "./components/Noise_Hazardous_FireRisk"
 import Location from "./components/Location"
+import Chemicals from "./components/Chemicals"
  
 
  function App() {
@@ -16,6 +17,7 @@ import Location from "./components/Location"
     <>
        <Location/>
       <Machenary/> 
+      <Chemicals/>
       <WaterConsumptionTable/>
       <SolidWaste/>
       <Sewage/>
