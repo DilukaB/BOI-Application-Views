@@ -42,7 +42,7 @@ const NoiseDescriptionComponent = () => {
   );
 
   return (
-    <div className="container mx-auto px-4 py-10 text-gray-800 space-y-8">
+    <div className="container mx-auto px-4 py-0 text-gray-800 space-y-30">
       {/* Added space-y-8 here for consistent spacing between sections */}
 
       {/* 4.3 Sewage */}
