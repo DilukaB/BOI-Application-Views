@@ -26,9 +26,9 @@
  
    return (
      <div className="container mx-auto px-4 py-10 text-gray-800">
-       <h2 className="text-2xl font-semibold mb-8 text-gray-800 border-b pb-2">
-          Location Detail(s)
-       </h2>
+       <h3 className="text-lg font-bold text-indigo-700 mb-2">
+         4) Location Detail(s)
+       </h3>
  
        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
          {locations.map((location, index) => (
@@ -38,9 +38,9 @@
            >
              <div className="flex justify-between items-start mb-4">
                <div>
-                 <h3 className="text-xl font-bold text-indigo-700">
+                 <h4 className="text-lg font-bold text-indigo-700 mb-2">
                    Location #{index + 1}
-                 </h3>
+                 </h4>
                  <p className="text-sm text-gray-500 mt-1">Project Site</p>
                </div>
              </div>

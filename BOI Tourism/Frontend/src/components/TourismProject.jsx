@@ -37,7 +37,7 @@ const TourismForm = () => {
   return (
     <div className="container mx-auto px-4 py-10 text-gray-800">
       <h2 className="text-2xl font-semibold mb-8 text-gray-800 border-b pb-2">
-        Section 5: Tourism Project Details
+         Tourism Project Details
       </h2>
 
       <div className="border rounded-xl p-6 transition-all duration-300 border-gray-200 shadow-md hover:shadow-lg bg-white space-y-6">
@@ -58,17 +58,17 @@ const TourismForm = () => {
 
         {/* 2. No. of Rooms/villas/chalets */}
         <div>
-          <h4 className="text-sm font-semibold text-gray-500 uppercase tracking-wider">
+          <h3 className="text-lg font-bold text-indigo-700 mb-2">
             2). No. of Rooms / Villas / Chalets
-          </h4>
+          </h3>
           <p className="mt-1 text-blue-800 font-medium">{project.noRoom}</p>
         </div>
 
         {/* 3. Expected Star classification */}
         <div>
-          <h4 className="text-sm font-semibold text-gray-500 uppercase tracking-wider">
+          <h3 className="text-lg font-bold text-indigo-700 mb-2">
             3). Expected Star Classification
-          </h4>
+          </h3>
           <p className="mt-1 text-blue-800 font-medium">{project.expectedStar} ★</p>
         </div>
       </div>

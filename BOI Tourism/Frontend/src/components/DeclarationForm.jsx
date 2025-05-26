@@ -3,12 +3,12 @@
 const DeclarationForm = () => {
   return (
     <div className="container mx-auto px-4 py-10 text-gray-800">
-      <h2 className="text-2xl font-semibold mb-8 text-gray-800 border-b pb-2">
-        Section 6: Declaration
-      </h2>
+      <h3 className="text-lg font-bold text-indigo-700 mb-2">
+        5) Declaration
+      </h3>
 
       <div className="border rounded-xl p-6 transition-all duration-300 border-gray-200 shadow-md hover:shadow-lg bg-white space-y-6 text-[15px] leading-relaxed print:text-black print:bg-white print:p-0 print:shadow-none print:rounded-none">
-        <p className="text-justify">
+        <p className="text-justify text-gray-700">
           I declare that the information furnished above in this application, attachments and otherwise
           represented are true and correct and undertake to inform the BOI immediately if any change in
           the information given above.
@@ -27,7 +27,7 @@ const DeclarationForm = () => {
             <div className="flex-grow border-b border-gray-400 h-6"></div>
           </div>
 
-          <div className="border border-gray-400 w-40 h-20 flex items-center justify-center text-gray-500">
+          <div className="border border-gray-400 w-40 h-20 flex items-center justify-center text-gray-500 bg-gray-50">
             Signature
           </div>
         </div>
