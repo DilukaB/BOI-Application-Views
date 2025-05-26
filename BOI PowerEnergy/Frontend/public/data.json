@@ -1,4 +1,31 @@
 {
+
+  
+     "applicationNo": "APP-001",
+  "siteAppCode": "SITE-001",
+  "investorID": "INV-001",
+  "siteLocations": [
+    {
+      "facadD1": "123 Main Street",
+      "facdistcd": "Colombo",
+      "ownership": "Private",
+      "facprvcd": "Western",
+      "lndacr": 1,
+      "lndrood": 2,
+      "lndpurch": 10
+    },
+    {
+      "facadD1": "456 Second Street",
+      "facdistcd": "Gampaha",
+      "ownership": "State",
+      "facprvcd": "Western",
+      "lndacr": 0,
+      "lndrood": 3,
+      "lndpurch": 20
+    }
+  ],
+
+
   "fuelConsumptions": [
     {
       "eqpcd": "Electricity / Generator",
@@ -67,6 +94,41 @@
       "swMethDisposal": "Municipal drainage"
     }
   ],
+   
+  "noiseList": [
+    {
+      "noiseCode": "5.5.1",
+      "niceDescription": [
+        { "description": "Generator" },
+        { "description": "Compressor" },
+        { "description": "Jackhammer" },
+        { "description": "Concrete mixer" },
+        { "description": "Heavy trucks" }
+      ]
+    },
+    {
+      "noiseCode": "5.5.2",
+      "niceDescription": [
+        { "description": "Use of silencers" },
+        { "description": "Installation of noise barriers" },
+        { "description": "Equipment maintenance" },
+        { "description": "Limiting operation time" },
+        { "description": "Enclosure of equipment" }
+      ]
+    },
+    {
+      "noiseCode": "5.5.3",
+      "niceDescription": [
+        { "description": "Installation of fire extinguishers" },
+        { "description": "Emergency response training" },
+        { "description": "Fire alarm systems" },
+        { "description": "Safe electrical wiring" },
+        { "description": "Storage of flammable materials safely" }
+      ]
+    }
+  ],
+    
+    
   "electricityList": [
     {
       "erCode": "During construction period",
@@ -78,6 +140,7 @@
       "commenceProduction": 300,
       "erCapacity": 450
     }
+  
   ],
    "contactOfficerList": [
     {

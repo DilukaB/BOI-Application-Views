@@ -16,6 +16,19 @@ const EnvironmentExamination = () => {
     return val;
   };
 
+  const getNoiseTitle = (code) => {
+    switch (code) {
+      case '5.5.1':
+        return 'High intensity noise and/or vibration generating machinery/equipment';
+      case '5.5.2':
+        return 'Methodology proposed for mitigation';
+      case '5.5.3':
+        return 'Plan for controlling fire';
+      default:
+        return '';
+    }
+  };
+
   if (!data) return <p className="p-4 text-gray-600">Loading...</p>;
 
   return (
@@ -30,10 +43,10 @@ const EnvironmentExamination = () => {
         <table className="min-w-full table-auto border-collapse text-sm">
           <thead className="bg-gray-100 text-gray-700">
             <tr>
-              <th className="border border-gray-300 px-4 py-2 text-left font-medium">Type</th>
-              <th className="border border-gray-300 px-4 py-2 text-left font-medium">Quantity (Ltrs/Day)</th>
-              <th className="border border-gray-300 px-4 py-2 text-left font-medium">Treatment</th>
-              <th className="border border-gray-300 px-4 py-2 text-left font-medium">Method for Disposal</th>
+              <th className="border border-gray-300 px-4 py-2">Type</th>
+              <th className="border border-gray-300 px-4 py-2">Quantity (Ltrs/Day)</th>
+              <th className="border border-gray-300 px-4 py-2">Treatment</th>
+              <th className="border border-gray-300 px-4 py-2">Method for Disposal</th>
             </tr>
           </thead>
           <tbody>
@@ -99,7 +112,7 @@ const EnvironmentExamination = () => {
 
       {/* 5.4 Sewage */}
       <h3 className="text-xl font-semibold text-gray-700 mb-3">5.4 Sewage</h3>
-      <div className="overflow-x-auto">
+      <div className="overflow-x-auto mb-6">
         <table className="min-w-full table-auto border-collapse text-sm">
           <thead className="bg-gray-100 text-gray-700">
             <tr>
@@ -119,6 +132,19 @@ const EnvironmentExamination = () => {
           </tbody>
         </table>
       </div>
+
+      {/* 5.5 Noise/Vibration */}
+      <h3 className="text-xl font-semibold text-gray-700 mb-3">5.5 Noise/Vibration</h3>
+      {data.noiseList.map((section, sectionIndex) => (
+        <div key={sectionIndex} className="mb-6">
+          <h4 className="text-lg font-medium text-gray-800 mb-2">{section.noiseCode} {getNoiseTitle(section.noiseCode)}</h4>
+          <ol className="list-decimal list-inside space-y-1 text-gray-700">
+            {section.niceDescription.map((item, idx) => (
+              <li key={idx}>{displayValue(item.description)}</li>
+            ))}
+          </ol>
+        </div>
+      ))}
     </div>
   );
 };
