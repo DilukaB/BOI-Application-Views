@@ -65,6 +65,65 @@
       "swTreatment": "STP (Sewage Treatment Plant)",
       "swMethDisposal": "Treated water for gardening"
     }
+  ],
+
+   "noiseList": [
+    {
+      "noiseCode": "5.5.1",
+      "niceDescription": [
+        { "description": "Generator" },
+        { "description": "Compressor" },
+        { "description": "Jackhammer" },
+        { "description": "Concrete mixer" },
+        { "description": "Heavy trucks" }
+      ]
+    },
+    {
+      "noiseCode": "5.5.2",
+      "niceDescription": [
+        { "description": "Use of silencers" },
+        { "description": "Soundproof enclosures" },
+        { "description": "Scheduling noisy operations" },
+        { "description": "Worker PPE (ear plugs)" },
+        { "description": "Regular maintenance" }
+      ]
+    },
+    {
+      "noiseCode": "5.5.3",
+      "niceDescription": [
+        { "description": "Fire extinguishers" },
+        { "description": "Emergency exit plan" },
+        { "description": "Fire alarms" },
+        { "description": "Sprinkler systems" },
+        { "description": "Training and drills" }
+      ]
+    }
+  ],
+    "contactOfficerList": [
+    {
+      "cntname": "Jane Doe",
+      "cntAddress": "123 Main St, NY",
+      "cntTel": "+1-555-1234",
+      "cntEmail": "jane.doe@example.com",
+      "cntFax": "+1-555-5678"
+    },
+    {
+      "cntname": "John Smith",
+      "cntAddress": "456 Park Ave, CA",
+      "cntTel": "+1-555-9876",
+      "cntEmail": "john.smith@example.com",
+      "cntFax": "+1-555-4321"
+    }
+  ],
+   "declarations": [
+    {
+      "investorID": "1",
+      "cname": "Alice Fernando",
+      "ctel": "+94771234567",
+      "cfax": "+94112566789",
+      "ceml": "alice@domain.com"
+    }
+     
   ]
   
 }
