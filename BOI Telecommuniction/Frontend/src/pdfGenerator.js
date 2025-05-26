@@ -236,44 +236,62 @@ const generatePdf = (formData) => {
       y = addTable("d) Sewage Treatment and Disposal", sewageHeaders, sewageData, y);
     }
 
-    if (formData.noiseList?.length || formData.mitigationMeasures?.length || formData.fireControlPlan?.length) {
-      doc.setFontSize(sectionFontSize);
-      doc.text("5.5 Noise & Vibration", margin, y);
-      y += 15;
+    // SECTION: Noise & Vibration
+ensureNewPageForSection(60);
+if (formData.noiseList?.length || formData.mitigationMeasures?.length || formData.fireControlPlan?.length) {
+  doc.setFontSize(sectionFontSize);
+  doc.text("5.5 Noise / Vibration", margin, y);
+  y += 15;
 
-      if (formData.noiseList?.length) {
-        doc.setFontSize(bodyFontSize);
-        doc.text("5.5.1 High intensity noise and/or vibration generating machinery / equipment (Please specify)", margin, y);
-        y += 8;
-        formData.noiseList.forEach((item, index) => {
-          doc.text(`${index + 1}. ${item.description || "N/A"}`, margin, y);
-          y += 6;
-        });
-        y += 10;
-      }
+  // 5.5.1 High intensity noise and/or vibration generating machinery/equipment
+  if (formData.noiseList?.length) {
+    formData.noiseList.forEach((item, index) => {
+      const noiseCode = item.noiseCode;
+      const descriptions = item.niceDescription.map(desc => desc.description);
 
-      if (formData.mitigationMeasures?.length) {
-        doc.setFontSize(bodyFontSize);
-        doc.text("5.5.2 Methodology proposed for mitigation", margin, y);
-        y += 8;
-        formData.mitigationMeasures.forEach((item, index) => {
-          doc.text(`${index + 1}. ${item.description || "N/A"}`, margin, y);
-          y += 6;
-        });
-        y += 10;
-      }
+      switch (noiseCode) {
+        case "5.5.1":
+          doc.setFontSize(bodyFontSize);
+          doc.setTextColor(100); // Light blue color for sub-section title
+          doc.text(`${noiseCode} – High intensity noise and/or vibration generating machinery/equipment`, margin, y);
+          y += 8;
+          descriptions.forEach((desc, idx) => {
+            doc.setFontSize(bodyFontSize);
+            doc.text(`${idx + 1}. ${desc}`, margin, y);
+            y += 6;
+          });
+          y += 10;
+          break;
 
-      if (formData.fireControlPlan?.length) {
-        doc.setFontSize(bodyFontSize);
-        doc.text("5.5.3 Plan for controlling fire", margin, y);
-        y += 8;
-        formData.fireControlPlan.forEach((item, index) => {
-          doc.text(`${index + 1}. ${item.description || "N/A"}`, margin, y);
-          y += 6;
-        });
-        y += 10;
+        case "5.5.2":
+          doc.setFontSize(bodyFontSize);
+          doc.setTextColor(100); // Light blue color for sub-section title
+          doc.text(`${noiseCode} – Methodology proposed for mitigation`, margin, y);
+          y += 8;
+          descriptions.forEach((desc, idx) => {
+            doc.setFontSize(bodyFontSize);
+            doc.text(`${idx + 1}. ${desc}`, margin, y);
+            y += 6;
+          });
+          y += 10;
+          break;
+
+        case "5.5.3":
+          doc.setFontSize(bodyFontSize);
+          doc.setTextColor(100); // Light blue color for sub-section title
+          doc.text(`${noiseCode} – Plan for controlling fire`, margin, y);
+          y += 8;
+          descriptions.forEach((desc, idx) => {
+            doc.setFontSize(bodyFontSize);
+            doc.text(`${idx + 1}. ${desc}`, margin, y);
+            y += 6;
+          });
+          y += 10;
+          break;
       }
-    }
+    });
+  }
+}
 
     if (formData.electricityList?.length) {
       const electricityData = formData.electricityList.map((item, index) => [
