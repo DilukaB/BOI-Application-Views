@@ -1,0 +1,86 @@
+ {
+  "rawMaterials": [
+    {
+      "itemDescription": "Iron Ore",
+      "quantityPerMonth": 1200,
+      "unitPerMonth": "Kg",
+      "source": "Local"
+    },
+    {
+      "itemDescription": "Cement",
+      "quantityPerMonth": 800,
+      "unitPerMonth": "Kg",
+      "source": "Imported"
+    },
+    {
+      "itemDescription": "Silica Sand",
+      "quantityPerMonth": 500,
+      "unitPerMonth": "Kg",
+      "source": "Local"
+    }
+  ],
+  "machineryLists": [
+    {
+      "machineDescription": "Crushing Machine",
+      "horsePower": "50 HP",
+      "quantity": 2,
+      "condition": "Used"
+    },
+    {
+      "machineDescription": "Mixing Drum",
+      "horsePower": "30 HP",
+      "quantity": 1,
+      "condition": "New"
+    }
+  ],
+  "fuelConsumptions": [
+    {
+      "eqpcd": "Diesel Generator",
+      "noeqp": 1,
+      "plpermth": 0,
+      "dlpermth": 400,
+      "fulpermth": 0,
+      "klpermth": 0
+    },
+    {
+      "eqpcd": "Forklift",
+      "noeqp": 2,
+      "plpermth": 150,
+      "dlpermth": 0,
+      "fulpermth": 0,
+      "klpermth": 0
+    },
+    
+    {
+      "eqpcd": "Forklift",
+      "noeqp": 2,
+      "plpermth": 150,
+      "dlpermth": 0,
+      "fulpermth": 0,
+      "klpermth": 0
+    },
+    
+    {
+      "eqpcd": "Forklift",
+      "noeqp": 2,
+      "plpermth": 150,
+      "dlpermth": 0,
+      "fulpermth": 0,
+      "klpermth": 0
+    }
+  ],
+  "chemicalDetails": [
+    {
+      "chemicalName": "Sodium Hydroxide",
+      "chPurpose": "Cleaning",
+      "chQuentity": 50,
+      "chuom": "Liters"
+    },
+    {
+      "chemicalName": "Nitrogen Fertilizer",
+      "chPurpose": "Soil Enrichment",
+      "chQuentity": 100,
+      "chuom": "Kg"
+    }
+  ]
+}
