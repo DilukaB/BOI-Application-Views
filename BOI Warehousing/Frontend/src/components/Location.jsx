@@ -26,7 +26,7 @@ const Location = () => {
 
   return (
     <div className="container mx-auto px-4 py-10 text-gray-800">
-      <h2 className="text-2xl font-semibold mb-8 text-gray-800 border-b pb-2">
+      <h2 className="text-2xl font-bold mb-6 text-indigo-800 border-b pb-2">
         1. Location(s)
       </h2>
 
