@@ -1,5 +1,18 @@
- 
+
  {
+
+     "fuelConsumptions": [
+    {
+      "eqpcd": "Electricity / Generator",
+      "noeqp": 2,
+      "plpermth": 100,
+      "dlpermth": 0,
+      "fulpermth": 0,
+      "klpermth": 50,
+      "biomas": 0,
+      "capacity": "20 kW"
+    }
+], 
  
  "waterConsumptions": [
     {
@@ -94,11 +107,25 @@
         { "description": "Fire extinguishers" },
         { "description": "Emergency exit plan" },
         { "description": "Fire alarms" },
-        { "description": "Sprinkler systems" },
-        { "description": "Training and drills" }
+        { "description": "Sprinkler systems" }
+       
       ]
     }
   ],
+
+    "electricityList": [
+    {
+      "erCode": "During Construction Period",
+      "commenceProduction": "50",
+      "erCapacity": "120"
+    },
+    {
+      "erCode": "Domestic Requirement",
+      "commenceProduction": "1000",
+      "erCapacity": "3000"
+    }
+  
+    ],
     "contactOfficerList": [
     {
       "cntname": "Jane Doe",
