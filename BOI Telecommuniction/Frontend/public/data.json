@@ -1,0 +1,72 @@
+ 
+ {
+ 
+ "waterConsumptions": [
+    {
+      "useOfWater": "Construction Use",
+      "commenceProduction": 0,
+      "waterCapacity": 0
+    },
+    {
+      "useOfWater": "Domestic Requirements",
+      "commenceProduction": 0,
+      "waterCapacity": 0
+    }
+  ],
+
+  "wasteWaterList": [
+    {
+      "wwsno": "Cooling",
+      "wwVolume": 1000,
+      "wwTreatment": "Heat exchange",
+      "wwDisposalMode": "Evaporation pond"
+    },
+    {
+      "wwsno": "Domestic",
+      "wwVolume": 500,
+      "wwTreatment": "Septic tank",
+      "wwDisposalMode": "Soak pit"
+    }
+  ],
+  "solidWasteList": [
+    {
+      "swsno": "1",
+      "swNature": "Biodegradable",
+      "swqty": 20,
+      "swTreatment": "Composting",
+      "swDisMode": "Manure use"
+    },
+    {
+      "swsno": "2",
+      "swNature": "Plastic",
+      "swqty": 10,
+      "swTreatment": "Segregation",
+      "swDisMode": "Recycling"
+    }
+  ],
+  "airEmissionsDetails": [
+    {
+      "aEenvisagedSQNO": "Suspended Particulate Matter (PM)",
+      "aeMethodologyControl": "Bag filters"
+    },
+    {
+      "aEenvisagedSQNO": "CO, CO2, SO2, NOx",
+      "aeMethodologyControl": "Scrubbers and catalytic converters"
+    }
+  ],
+  "sewageList": [
+    {
+      "swNatureOfEffluent": "From construction use",
+      "swTreatment": "Sedimentation tank",
+      "swMethDisposal": "Reuse for dust suppression"
+    },
+    {
+      "swNatureOfEffluent": "From human use",
+      "swTreatment": "STP (Sewage Treatment Plant)",
+      "swMethDisposal": "Treated water for gardening"
+    }
+  ]
+  
+}
+
+  
