@@ -307,48 +307,65 @@ if (formData.contactOfficerList?.length > 0) {
   currentY = doc.lastAutoTable.finalY + 10;
 }
 
-// Investors' Declaration & Signature 
+  // Helper function to draw dotted lines
+function drawDottedLine(doc, x1, y1, x2, gap = 2, dotLength = 1) {
+  doc.setLineWidth(0.5);
+  doc.setDrawColor(150); // Gray color
+  for (let x = x1; x < x2; x += gap + dotLength) {
+    doc.line(x, y1, x + dotLength, y1);
+  }
+}
+
+// Section 9: Investors' Declaration & Signature
+if (formData.declarations && formData.declarations.length > 0) {
+  // Add new page and reset Y position
+  doc.addPage();
+  currentY = 30;
+
+  // Section header
   addSectionHeader("Investors' Declaration & Signature");
-  currentY += 8; // Space after header
+  currentY += 8;
 
   // Declaration paragraph
-  const declarationText = `We certify that the proposal constitutes a new project and does not involve the closure of an existing enterprise of a similar nature or the transfer of any assets from an existing enterprise in Sri Lanka. (Attach letter of authority or power of attorney if applicable)`;
+  const declarationText =
+    "We certify that the proposal constitutes a new project and does not involve the closure of an existing enterprise of a similar nature or the transfer of any assets from an existing enterprise in Sri Lanka. (Attach letter of authority or power of attorney if applicable)";
   doc.setFont("helvetica", "normal");
   doc.setFontSize(10);
-  doc.text(declarationText, 14, currentY);
-  currentY += 15; // Space after paragraph
 
-  // Investor Details Table (only if there are investors)
-  if (formData.investorList && formData.investorList.length > 0) {
-    autoTable(doc, {
-      startY: currentY,
-      head: [["Name of Investor", "Tel", "Email", "Fax"]],
-      body: formData.investorList.map((i) => [
-        i.invName || "N/A",
-        i.invTel || "N/A",
-        i.invEmail || "N/A",
-        i.invFax || "N/A",
-      ]),
-      theme: "grid",
-      styles: { fontSize: 10 },
-      columnStyles: {
-        0: { cellWidth: 100 }, // Name
-        1: { cellWidth: 60 },  // Tel
-        2: { cellWidth: 120 }, // Email
-        3: { cellWidth: 60 },  // Fax
-      },
-      margin: { left: 14, right: 14 },
-      headStyles: {
-        fillColor: [0, 123, 255],
-        textColor: [255, 255, 255],
-      },
-      alternateRowStyles: {
-        fillColor: [240, 240, 240],
-      },
-    });
+  // Wrap long text automatically
+  const splitDeclaration = doc.splitTextToSize(declarationText, 170);
+  splitDeclaration.forEach((line) => {
+    doc.text(line, 14, currentY);
+    currentY += 6;
+  });
+  currentY += 10; // Space after declaration
 
-    currentY = doc.lastAutoTable.finalY + 15; // Space after table
-  }
+  // Investor Details Table
+  autoTable(doc, {
+    startY: currentY,
+    head: [["Name of Investor", "Tel", "Email", "Fax"]],
+    body: formData.declarations.map((d) => [
+      d.cname || "N/A",
+      d.ctel || "N/A",
+      d.ceml || "N/A",
+      d.cfax || "N/A",
+    ]),
+    theme: "grid",
+    styles: { fontSize: 10 },
+    columnStyles: {
+      0: { cellWidth: 45 }, // Name
+      1: { cellWidth: 45 }, // Tel
+      2: { cellWidth: 45 }, // Email
+      3: { cellWidth: 45 }, // Fax
+    },
+    margin: { left: 14, right: 14 },
+    alternateRowStyles: {
+      fillColor: [240, 240, 240], // Light gray rows
+    },
+  });
+
+  // Update Y position after table
+  currentY = doc.lastAutoTable.finalY + 10;
 
   // Signatures Section
   doc.setFont("helvetica", "bold");
@@ -356,27 +373,23 @@ if (formData.contactOfficerList?.length > 0) {
   doc.text("Signatures of Investors", 14, currentY);
   currentY += 8;
 
-  if (formData.investorList && formData.investorList.length > 0) {
-    formData.investorList.forEach((i) => {
-      doc.setFont("helvetica", "normal");
-      doc.text(i.invName || "N/A", 14, currentY);
-      currentY += 5;
-
-      // Draw dotted line for signature
-      doc.setDrawColor(150); // Gray color
-      doc.dottedLine(14, currentY, 90, currentY);
-      doc.text("Signature:", 14, currentY - 2);
-      currentY += 7;
-
-      // Draw dotted line for date
-      doc.dottedLine(14, currentY, 90, currentY);
-      doc.text("Date:", 14, currentY - 2);
-      currentY += 12;
-    });
-  } else {
-    doc.text("No investor details found.", 14, currentY);
+  // Signature lines
+  formData.declarations.forEach((d) => {
+    doc.setFont("helvetica", "normal");
+    doc.text(d.cname || "N/A", 14, currentY); // Investor name
     currentY += 10;
-  }
+
+    // Signature line
+    drawDottedLine(doc, 14, currentY, 90);
+    doc.text("Signature:", 14, currentY - 2);
+    currentY += 7;
+
+    // Date line
+    drawDottedLine(doc, 14, currentY, 90);
+    doc.text("Date:", 14, currentY - 2);
+    currentY += 12;
+  });
+}
 
     // Save PDF
     doc.save("Facility_Inspection_Report.pdf");
