@@ -19,12 +19,12 @@ const NoiseDescriptionComponent = () => {
   }, []);
 
   const Section = ({ title, description, children }) => (
-    <section className="mb-12">
+    <section>
       {title && (
         <h2 className="text-lg font-semibold mt-4 mb-1 text-gray-800">{title}</h2>
       )}
       {description && (
-        <p className="italic text-sm text-gray-500 mb-4 ml-8">
+        <p className="italic text-sm text-gray-500 mb-1 ml-8 ">
           {description}
         </p>
       )}
@@ -42,12 +42,11 @@ const NoiseDescriptionComponent = () => {
   );
 
   return (
-    <div className="container mx-auto px-4 py-10 text-gray-800">
+    <div className="container mx-auto px-4 py-10 text-gray-800 space-y-8">
+      {/* Added space-y-8 here for consistent spacing between sections */}
+
       {/* 4.3 Sewage */}
-      <Section
-        title=" "
-        description="(b) Sewage"
-      >
+      <Section title=" " description="(b) Sewage">
         <thead className="bg-gray-100 text-gray-700 uppercase text-xs">
           <tr>
             <th className="border px-4 py-2 font-semibold">Nature of Effluent</th>

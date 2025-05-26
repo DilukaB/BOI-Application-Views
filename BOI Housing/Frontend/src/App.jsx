@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+ import React, { useState, useEffect } from 'react';
 import SiteLocationsForm from './components/SiteLocationsForm';
 import EquipmentTable from './components/EquipmentTable';
 import WaterConsumptionTable from './components/WaterConsumptionTable';
@@ -45,24 +45,58 @@ function App() {
 
   return (
     <div className="p-6 space-y-8">
-      <button
-        onClick={handleGeneratePdf}
-        className="mb-6 px-4 py-2 bg-blue-600 text-white rounded"
-      >
-        Download PDF
-      </button>
+      <div>
+        <button
+          onClick={handleGeneratePdf}
+          className="px-4 py-2 bg-blue-600 text-white rounded"
+        >
+          Download PDF
+        </button>
+      </div>
 
-      <SiteLocationsForm siteLocations={locationsData.siteLocations || []} />
-      <EquipmentTable equipmentList={locationsData.equipmentList || []} />
-      <Chemicals/>
-      <WaterConsumptionTable waterConsumptions={locationsData.waterConsumptions || []} />
-      <SolidWaste />
-      <NoiseDescriptionComponent />
-      <ElectricityTable electricityList={locationsData.electricityList || []} />
-      <ContactOfficerTable contactOfficerList={locationsData.contactOfficerList || []} />
-      <InvestorTable investorList={locationsData.investorList || []} />
-      <InvestmentDocumentChecklist />
-      <AnnexureIIForm />
+      <div>
+        <SiteLocationsForm siteLocations={locationsData.siteLocations || []} />
+      </div>
+
+      <div>
+        <EquipmentTable equipmentList={locationsData.equipmentList || []} />
+      </div>
+
+      <div>
+        <Chemicals />
+      </div>
+
+      <div>
+        <WaterConsumptionTable waterConsumptions={locationsData.waterConsumptions || []} />
+      </div>
+
+      <div>
+        <SolidWaste />
+      </div>
+
+      <div>
+        <NoiseDescriptionComponent />
+      </div>
+
+      <div>
+        <ElectricityTable electricityList={locationsData.electricityList || []} />
+      </div>
+
+      <div>
+        <ContactOfficerTable contactOfficerList={locationsData.contactOfficerList || []} />
+      </div>
+
+      <div>
+        <InvestorTable investorList={locationsData.investorList || []} />
+      </div>
+
+      <div>
+        <InvestmentDocumentChecklist />
+      </div>
+
+      <div>
+        <AnnexureIIForm />
+      </div>
     </div>
   );
 }
