@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+ import React, { useEffect, useState } from 'react';
 
 const NoiseVibration = () => {
   const [noiseData, setNoiseData] = useState([]);
@@ -24,12 +24,17 @@ const NoiseVibration = () => {
   };
 
   return (
-    <div style={{ padding: '20px' }}>
-      <h2>5.5 Noise Vibration</h2>
+    <div className="p-6 bg-white shadow-lg rounded-lg">
+      <h2 className="text-2xl font-semibold text-gray-800 mb-6">
+        5.5 Noise Vibration
+      </h2>
+
       {noiseData.map((item) => (
-        <div key={item.noiseCode} style={{ marginBottom: '20px' }}>
-          <strong>{getTitle(item.noiseCode)}</strong>
-          <ol>
+        <div key={item.noiseCode} className="mb-6">
+          <h3 className="font-semibold text-gray-700 mb-2">
+            {getTitle(item.noiseCode)}
+          </h3>
+          <ol className="list-decimal pl-6 space-y-1 text-gray-800">
             {item.niceDescription.map((desc, index) => (
               <li key={index}>{desc.description}</li>
             ))}

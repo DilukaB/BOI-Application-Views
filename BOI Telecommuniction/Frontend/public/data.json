@@ -107,8 +107,8 @@
         { "description": "Fire extinguishers" },
         { "description": "Emergency exit plan" },
         { "description": "Fire alarms" },
-        { "description": "Sprinkler systems" },
-        { "description": "Training and drills" }
+        { "description": "Sprinkler systems" }
+       
       ]
     }
   ],
