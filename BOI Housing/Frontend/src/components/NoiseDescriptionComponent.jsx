@@ -20,16 +20,23 @@ const NoiseDescriptionComponent = () => {
 
   const Section = ({ title, description, children }) => (
     <section className="mb-12">
-      <h2 className="text-2xl font-semibold mb-6 text-gray-800 border-b pb-2">{title}</h2>
-      {description && (
-        <p className="text-sm text-gray-600 mb-5 pl-4 border-l-4 border-blue-500 italic">{description}</p>
+      {title && (
+        <h2 className="text-lg font-semibold mt-4 mb-1 text-gray-800">{title}</h2>
       )}
-      <div className="border rounded-xl p-6 transition-all duration-300 border-gray-200 shadow-md hover:shadow-lg bg-white space-y-6">
+      {description && (
+        <p className="italic text-sm text-gray-500 mb-4 ml-8">
+          {description}
+        </p>
+      )}
+      <div className="bg-white rounded-xl shadow-lg p-6">
         <div className="overflow-x-auto">
-          <table className="min-w-full table-auto text-sm text-left text-gray-700">
+          <table className="min-w-full text-sm text-left border border-gray-300 rounded-lg overflow-hidden">
             {children}
           </table>
         </div>
+        <p className="text-xs italic text-gray-500 mt-4">
+          Note: Please ensure the data reflects project-specific risk and control measures.
+        </p>
       </div>
     </section>
   );
@@ -37,23 +44,26 @@ const NoiseDescriptionComponent = () => {
   return (
     <div className="container mx-auto px-4 py-10 text-gray-800">
       {/* 4.3 Sewage */}
-      <Section title="4.3 Sewage">
-        <thead className="bg-gray-100 text-gray-600 uppercase text-xs tracking-wider">
+      <Section
+        title=" "
+        description="(b) Sewage"
+      >
+        <thead className="bg-gray-100 text-gray-700 uppercase text-xs">
           <tr>
-            <th className="px-6 py-3 border border-gray-300 font-semibold">Nature of Effluent</th>
-            <th className="px-6 py-3 border border-gray-300 font-semibold">Treatment</th>
-            <th className="px-6 py-3 border border-gray-300 font-semibold">Method of Disposal</th>
+            <th className="border px-4 py-2 font-semibold">Nature of Effluent</th>
+            <th className="border px-4 py-2 font-semibold">Treatment</th>
+            <th className="border px-4 py-2 font-semibold">Method of Disposal</th>
           </tr>
         </thead>
         <tbody>
           {sewageList.map((item, index) => (
             <tr
               key={index}
-              className={`border-t ${index % 2 === 0 ? 'bg-gray-50' : 'bg-white'} hover:bg-gray-100 transition duration-150`}
+              className={`${index % 2 === 0 ? 'bg-gray-50' : 'bg-white'} hover:bg-indigo-50 transition`}
             >
-              <td className="px-6 py-4 border border-gray-200">{item.swNatureOfEffluent}</td>
-              <td className="px-6 py-4 border border-gray-200">{item.swTreatment}</td>
-              <td className="px-6 py-4 border border-gray-200">{item.swMethDisposal}</td>
+              <td className="border px-4 py-2">{item.swNatureOfEffluent}</td>
+              <td className="border px-4 py-2">{item.swTreatment}</td>
+              <td className="border px-4 py-2">{item.swMethDisposal}</td>
             </tr>
           ))}
         </tbody>
@@ -61,13 +71,13 @@ const NoiseDescriptionComponent = () => {
 
       {/* 4.4 Noise/Vibration */}
       <Section
-        title="4.4 Noise/Vibration"
-        description="4.4.1 High intensity noise and or vibration generating machinery/equipment used during construction (Please specify)"
+        title="3.4 Noise/Vibration"
+        description="High intensity noise and/or vibration generating machinery/equipment used during construction (Please specify)"
       >
-        <thead className="bg-gray-100 text-gray-600 uppercase text-xs tracking-wider">
+        <thead className="bg-gray-100 text-gray-700 uppercase text-xs">
           <tr>
-            <th className="px-6 py-3 border border-gray-300 font-semibold">Noise Code</th>
-            <th className="px-6 py-3 border border-gray-300 font-semibold">Description</th>
+            <th className="border px-4 py-2 font-semibold">Noise Code</th>
+            <th className="border px-4 py-2 font-semibold">Description</th>
           </tr>
         </thead>
         <tbody>
@@ -75,10 +85,10 @@ const NoiseDescriptionComponent = () => {
             item.niceDescription.map((desc, descIndex) => (
               <tr
                 key={`${index}-${descIndex}`}
-                className={`border-t ${descIndex % 2 === 0 ? 'bg-gray-50' : 'bg-white'} hover:bg-gray-100 transition duration-150`}
+                className={`${descIndex % 2 === 0 ? 'bg-gray-50' : 'bg-white'} hover:bg-indigo-50 transition`}
               >
-                <td className="px-6 py-4 border border-gray-200">{item.noiseCode}</td>
-                <td className="px-6 py-4 border border-gray-200">{desc.description}</td>
+                <td className="border px-4 py-2">{item.noiseCode}</td>
+                <td className="border px-4 py-2">{desc.description}</td>
               </tr>
             ))
           )}
@@ -87,21 +97,21 @@ const NoiseDescriptionComponent = () => {
 
       {/* 4.5 Hazardous Materials */}
       <Section
-        title="4.5 Hazardous Materials"
-        description="Potentially dangerous injurious substance in process (Please specify)"
+        title="3.5 Hazardous Materials"
+        description="Potentially dangerous injurious substances in process (Please specify)"
       >
-        <thead className="bg-gray-100 text-gray-600 uppercase text-xs tracking-wider">
+        <thead className="bg-gray-100 text-gray-700 uppercase text-xs">
           <tr>
-            <th className="px-6 py-3 border border-gray-300 font-semibold">Hazardous Description</th>
+            <th className="border px-4 py-2 font-semibold">Hazardous Description</th>
           </tr>
         </thead>
         <tbody>
           {hazardousList.map((hazard, index) => (
             <tr
               key={index}
-              className={`border-t ${index % 2 === 0 ? 'bg-gray-50' : 'bg-white'} hover:bg-gray-100 transition duration-150`}
+              className={`${index % 2 === 0 ? 'bg-gray-50' : 'bg-white'} hover:bg-indigo-50 transition`}
             >
-              <td className="px-6 py-4 border border-gray-200">{hazard.hazardousDes}</td>
+              <td className="border px-4 py-2">{hazard.hazardousDes}</td>
             </tr>
           ))}
         </tbody>
@@ -109,21 +119,21 @@ const NoiseDescriptionComponent = () => {
 
       {/* 4.6 Fire Risk */}
       <Section
-        title="4.6 Fire Risk"
+        title="3.6 Fire Risk"
         description="Potentially inflammable or incendiary materials in process"
       >
-        <thead className="bg-gray-100 text-gray-600 uppercase text-xs tracking-wider">
+        <thead className="bg-gray-100 text-gray-700 uppercase text-xs">
           <tr>
-            <th className="px-6 py-3 border border-gray-300 font-semibold">Fire Risk Description</th>
+            <th className="border px-4 py-2 font-semibold">Fire Risk Description</th>
           </tr>
         </thead>
         <tbody>
           {fireRiskList.map((fireRisk, index) => (
             <tr
               key={index}
-              className={`border-t ${index % 2 === 0 ? 'bg-gray-50' : 'bg-white'} hover:bg-gray-100 transition duration-150`}
+              className={`${index % 2 === 0 ? 'bg-gray-50' : 'bg-white'} hover:bg-indigo-50 transition`}
             >
-              <td className="px-6 py-4 border border-gray-200">{fireRisk.fireRiskDescription}</td>
+              <td className="border px-4 py-2">{fireRisk.fireRiskDescription}</td>
             </tr>
           ))}
         </tbody>
