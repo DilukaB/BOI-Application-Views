@@ -35,7 +35,7 @@ const Machenary = () => {
                 <th className="border px-4 py-2 font-semibold">Horse Power (HP)</th>
                 <th className="border px-4 py-2 font-semibold">No of Items</th>
                 <th className="border px-4 py-2 font-semibold">Condition (used/new)</th>
-                <th className="border px-4 py-2 font-semibold">Value (USD)</th>
+                
               </tr>
             </thead>
             <tbody>
@@ -48,9 +48,6 @@ const Machenary = () => {
                   <td className="border px-4 py-2 text-gray-700">{item.eqppwr}</td>
                   <td className="border px-4 py-2 text-gray-700">{item.eqpcap}</td>
                   <td className="border px-4 py-2 text-gray-700">{item.eqpcnd}</td>
-                  <td className="border px-4 py-2 text-gray-700 font-medium">
-                    ${item.machineryValue?.toLocaleString() ?? '0'}
-                  </td>
                 </tr>
               ))}
             </tbody>
