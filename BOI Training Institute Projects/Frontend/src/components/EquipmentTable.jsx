@@ -13,8 +13,9 @@ const EquipmentTable = () => {
   return (
     <div className="container mx-auto px-4 py-10 text-gray-800">
       <div className="bg-white rounded-xl shadow-lg p-6">
-        <h2 className="text-2xl font-bold mb-6 text-indigo-800 border-b pb-2">
-          4. Equipment (Construction Related)
+        <h1 className="text-2xl font-bold mb-6 text-indigo-800 border-b pb-2">2) Environmental Examination</h1>
+        <h2 className="text-1xl font-bold mb-6 text-indigo-800 border-b pb-2">
+          2.1) Equipment (Construction Related)
         </h2>
 
         <div className="overflow-x-auto">

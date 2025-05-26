@@ -13,8 +13,8 @@ const WaterConsumptionTable = () => {
   return (
     <div className="container mx-auto px-4 py-10 text-gray-800">
       <div className="bg-white rounded-xl shadow-lg p-6">
-        <h2 className="text-2xl font-bold mb-6 text-indigo-800 border-b pb-2">
-          4.2 Water Use
+        <h2 className="text-1xl font-bold mb-6 text-indigo-800 border-b pb-2">
+          2.2 Water Use
         </h2>
 
         <div className="overflow-x-auto">
