@@ -7,14 +7,17 @@ import ElectricityTable from "./components/ElectricityTable"
 import ContactOfficer from "./components/ContactOfficer"
 import InvestorsDeclaration from "./components/InvestorsDeclaration"
 import Noise_Hazardous_FireRisk from "./components/Noise_Hazardous_FireRisk"
+import Location from "./components/Location"
+import Chemicals from "./components/Chemicals"
  
 
  function App() {
 
   return (
     <>
-       
+       <Location/>
       <Machenary/> 
+      <Chemicals/>
       <WaterConsumptionTable/>
       <SolidWaste/>
       <Sewage/>

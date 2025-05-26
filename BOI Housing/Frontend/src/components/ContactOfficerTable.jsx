@@ -3,8 +3,8 @@
 const ContactOfficerTable = ({ contactOfficerList }) => {
   return (
     <div className="container mx-auto px-4 py-10 text-gray-800">
-      <h2 className="text-2xl font-semibold mb-8 text-gray-800 border-b pb-2">
-        Section 7: Contact Officers
+      <h2 className="text-2xl font-bold mb-2 text-indigo-800 border-b pb-2">
+        5) Contact Officers
       </h2>
 
       <div className="border rounded-xl p-6 transition-all duration-300 border-gray-200 shadow-md hover:shadow-lg bg-white space-y-6">

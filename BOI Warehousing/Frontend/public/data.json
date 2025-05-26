@@ -1,4 +1,103 @@
  {
+
+
+  "siteLocations": [
+    {
+    "facadD1": "123 Green Street",
+    "facadD2": "Industrial Zone",
+    "facadD3": "Cityville",
+    "factel": "011-2233445",
+    "factlx": "011-3344556",
+    "facfax": "011-3344557",
+    "faceml": "factory1@example.com",
+    "lndacr": 2,
+    "lndrood": 1,
+    "lndpurch": 15,
+    "facprvcd": "WP",
+    "facdistcd": "Colombo",
+    "facagacd": "AG001",
+    "longitude": "79.8612",
+    "latitude": "6.9271",
+    "ownership": "Private",
+    "numberOfUnits": "2",
+    "offSiteInfrastructure": "Available",
+    "onSiteInfrastructure": "Complete",
+    "coveredSpace": 1500,
+    "existingBuildings": "Yes"
+  },
+  {
+    "facadD1": "78 River Road",
+    "facadD2": "Tech Park",
+    "facadD3": "Galle",
+    "factel": "091-2244668",
+    "factlx": "091-2244669",
+    "facfax": "",
+    "faceml": "techplant@example.com",
+    "lndacr": 3,
+    "lndrood": 0,
+    "lndpurch": 5,
+    "facprvcd": "SP",
+    "facdistcd": "Galle",
+    "facagacd": "AG015",
+    "longitude": "80.2151",
+    "latitude": "6.0535",
+    "ownership": "State",
+    "numberOfUnits": "4",
+    "offSiteInfrastructure": "Not Available",
+    "onSiteInfrastructure": "Partial",
+    "coveredSpace": 2500,
+    "existingBuildings": "No"
+  },
+  {
+    "facadD1": "456 Blue Lake Ave",
+    "facadD2": "Eco Zone",
+    "facadD3": "Kandy",
+    "factel": "081-3322114",
+    "factlx": "081-3322115",
+    "facfax": "081-3322116",
+    "faceml": "eco@example.com",
+    "lndacr": 1,
+    "lndrood": 2,
+    "lndpurch": 30,
+    "facprvcd": "CP",
+    "facdistcd": "Kandy",
+    "facagacd": "AG009",
+    "longitude": "80.6350",
+    "latitude": "7.2906",
+    "ownership": "Private",
+    "numberOfUnits": "1",
+    "offSiteInfrastructure": "Available",
+    "onSiteInfrastructure": "Not Started",
+    "coveredSpace": 900,
+    "existingBuildings": "No"
+  },
+  {
+    "facadD1": "89 Industrial Blvd",
+    "facadD2": "North Sector",
+    "facadD3": "Jaffna",
+    "factel": "021-4455667",
+    "factlx": "",
+    "facfax": "",
+    "faceml": "northplant@example.com",
+    "lndacr": 5,
+    "lndrood": 3,
+    "lndpurch": 10,
+    "facprvcd": "NP",
+    "facdistcd": "Jaffna",
+    "facagacd": "AG021",
+    "longitude": "80.0088",
+    "latitude": "9.6615",
+    "ownership": "Other",
+    "numberOfUnits": "3",
+    "offSiteInfrastructure": "Partially Available",
+    "onSiteInfrastructure": "Complete",
+    "coveredSpace": 3200,
+    "existingBuildings": "Yes"
+  }
+  ],
+
+
+
   "machineryLists": [
     {
       "machineDescription": "Excavator",
@@ -13,8 +112,32 @@
       "quantity": 1,
       "condition": "Excellent",
       "machineryValue": 75000
+    },
+      {
+      "machineDescription": "Bulldozer",
+      "horsePower": "150 HP",
+      "quantity": 1,
+      "condition": "Excellent",
+      "machineryValue": 75000
     }
   ],
+  "chemicalDetails": [
+    {
+      "chemicalName": "Sulfuric Acid",
+      "chPurpose": "pH adjustment",
+      "chuom": "L",
+      "chQuentity": 25
+    },
+    {
+      "chemicalName": "Sodium Hypochlorite",
+      "chPurpose": "Disinfection",
+      "chuom": "L",
+      "chQuentity": 40
+    }
+   
+  ],
+
+ 
  "waterConsumptions": [
     {
       "useOfWater": "Process Use",

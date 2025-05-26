@@ -10,6 +10,7 @@ import AnnexureIIForm from './components/AnnexureIIForm';
 import NoiseDescriptionComponent from './components/NoiseDescriptionComponent';
 import SolidWaste from './components/SolidWaste';
 import { generatePdf } from './pdfGenerator';
+import Chemicals from './components/Chemicals';
 
 function App() {
   const [locationsData, setLocationsData] = useState(null);
@@ -53,6 +54,7 @@ function App() {
 
       <SiteLocationsForm siteLocations={locationsData.siteLocations || []} />
       <EquipmentTable equipmentList={locationsData.equipmentList || []} />
+      <Chemicals/>
       <WaterConsumptionTable waterConsumptions={locationsData.waterConsumptions || []} />
       <SolidWaste />
       <NoiseDescriptionComponent />

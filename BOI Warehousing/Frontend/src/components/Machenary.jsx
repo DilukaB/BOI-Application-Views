@@ -10,48 +10,56 @@ const Machenary = () => {
       .catch((err) => console.error('Error loading machinery data:', err));
   }, []);
 
-  return (
-    <div className="p-6 bg-white shadow-lg rounded-lg">
-      <h2 className="text-2xl font-semibold text-gray-800 mb-6">
-        4) Machinery List
-      </h2>
+  if (machinery.length === 0) {
+    return (
+      <div className="flex justify-center py-20">
+        <p className="text-lg font-medium text-gray-500 animate-pulse">
+          Loading machinery data...
+        </p>
+      </div>
+    );
+  }
 
-      <div className="overflow-x-auto">
-        <table className="min-w-full table-auto border-collapse text-sm">
-          <thead className="bg-gray-100 text-gray-700">
-            <tr>
-              <th className="border border-gray-300 px-6 py-3 text-left font-medium">Item</th>
-              <th className="border border-gray-300 px-6 py-3 text-left font-medium">HP</th>
-              <th className="border border-gray-300 px-6 py-3 text-left font-medium">No.of items</th>
-              <th className="border border-gray-300 px-6 py-3 text-left font-medium">Condition(Used/New)</th>
-              <th className="border border-gray-300 px-6 py-3 text-left font-medium">Value (USD)</th>
-            </tr>
-          </thead>
-          <tbody>
-            {machinery.length > 0 ? (
-              machinery.map((item, index) => (
+  return (
+    <div className="container mx-auto px-4 py-10 text-gray-800">
+      <div className="bg-white rounded-xl shadow-lg p-6">
+        <h2 className="text-2xl font-bold mb-6 text-indigo-800 border-b pb-2">
+          4. Machinery List
+        </h2>
+
+        <div className="overflow-x-auto">
+          <table className="min-w-full text-sm text-left border border-gray-300 rounded-lg overflow-hidden">
+            <thead className="bg-gray-100 text-gray-700 uppercase text-xs">
+              <tr>
+                <th className="border px-4 py-2 font-semibold">Item Description</th>
+                <th className="border px-4 py-2 font-semibold">Horse Power (HP)</th>
+                <th className="border px-4 py-2 font-semibold">Quantity</th>
+                <th className="border px-4 py-2 font-semibold">Condition</th>
+                <th className="border px-4 py-2 font-semibold">Value (USD)</th>
+              </tr>
+            </thead>
+            <tbody>
+              {machinery.map((item, index) => (
                 <tr
                   key={index}
-                  className={`hover:bg-gray-50 ${index % 2 === 0 ? 'bg-gray-50' : 'bg-white'}`}
+                  className={`${index % 2 === 0 ? 'bg-gray-50' : 'bg-white'} hover:bg-indigo-50 transition`}
                 >
-                  <td className="border border-gray-300 px-6 py-4 text-gray-800">{item.machineDescription}</td>
-                  <td className="border border-gray-300 px-6 py-4 text-gray-700">{item.horsePower}</td>
-                  <td className="border border-gray-300 px-6 py-4 text-gray-700">{item.quantity}</td>
-                  <td className="border border-gray-300 px-6 py-4 text-gray-700">{item.condition}</td>
-                  <td className="border border-gray-300 px-6 py-4 text-gray-700">
-                    ${item.machineryValue?.toLocaleString() ?? 0}
+                  <td className="border px-4 py-2 text-gray-800">{item.machineDescription}</td>
+                  <td className="border px-4 py-2 text-gray-700">{item.horsePower}</td>
+                  <td className="border px-4 py-2 text-gray-700">{item.quantity}</td>
+                  <td className="border px-4 py-2 text-gray-700">{item.condition}</td>
+                  <td className="border px-4 py-2 text-gray-700 font-medium">
+                    ${item.machineryValue?.toLocaleString() ?? '0'}
                   </td>
                 </tr>
-              ))
-            ) : (
-              <tr>
-                <td colSpan="5" className="text-center py-5 text-gray-500">
-                  No machinery data available.
-                </td>
-              </tr>
-            )}
-          </tbody>
-        </table>
+              ))}
+            </tbody>
+          </table>
+        </div>
+
+        <p className="text-xs italic text-gray-500 mt-4">
+          Note: Ensure all machinery details are accurate and up to date.
+        </p>
       </div>
     </div>
   );
