@@ -17,32 +17,41 @@ const WaterConsumption = () => {
   };
 
   return (
-    <div className="p-6 bg-white shadow-lg rounded-lg">
-      <h2 className="text-2xl font-semibold text-gray-800 mb-6">
-        4) Water Use (If applicable) (Ltrs/month)
-      </h2>
+    <div className="container mx-auto px-4 py-10 text-gray-800">
+      <div className="bg-white rounded-xl shadow-lg p-6">
+        <h2 className="text-2xl font-bold mb-6 text-indigo-800 border-b pb-2">
+          4. Water Use <span className="text-sm font-medium text-gray-500">(Ltrs/month)</span>
+        </h2>
 
-      <div className="overflow-x-auto">
-        <table className="min-w-full table-auto border-collapse text-sm">
-          <thead>
-            <tr className="bg-gray-100 text-gray-700">
-              <th className="border border-gray-300 px-4 py-2 text-left font-medium">#</th>
-              <th className="border border-gray-300 px-4 py-2 text-left font-medium">Type of Use</th>
-              <th className="border border-gray-300 px-4 py-2 text-left font-medium">At Commencement or Production</th>
-              <th className="border border-gray-300 px-4 py-2 text-left font-medium">At Capacity</th>
-            </tr>
-          </thead>
-          <tbody>
-            {waterData.map((item, index) => (
-              <tr key={index} className={`hover:bg-gray-50 ${index % 2 === 0 ? 'bg-gray-50' : 'bg-white'}`}>
-                <td className="border border-gray-300 px-4 py-2 text-gray-800">{index + 1}</td>
-                <td className="border border-gray-300 px-4 py-2 text-gray-800">{displayValue(item.useOfWater)}</td>
-                <td className="border border-gray-300 px-4 py-2 text-gray-800">{displayValue(item.commenceProduction)}</td>
-                <td className="border border-gray-300 px-4 py-2 text-gray-800">{displayValue(item.waterCapacity)}</td>
+        <div className="overflow-x-auto">
+          <table className="min-w-full text-sm text-left border border-gray-300 rounded-lg overflow-hidden">
+            <thead className="bg-gray-100 text-gray-700 uppercase text-xs">
+              <tr>
+                <th className="border px-4 py-2 font-semibold">#</th>
+                <th className="border px-4 py-2 font-semibold">Type of Use</th>
+                <th className="border px-4 py-2 font-semibold">At Commencement or Production</th>
+                <th className="border px-4 py-2 font-semibold">At Capacity</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {waterData.map((item, index) => (
+                <tr
+                  key={index}
+                  className={`${index % 2 === 0 ? 'bg-gray-50' : 'bg-white'} hover:bg-indigo-50 transition`}
+                >
+                  <td className="border px-4 py-2">{index + 1}</td>
+                  <td className="border px-4 py-2 font-medium text-gray-800">{displayValue(item.useOfWater)}</td>
+                  <td className="border px-4 py-2">{displayValue(item.commenceProduction)}</td>
+                  <td className="border px-4 py-2">{displayValue(item.waterCapacity)}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+
+        <p className="text-xs italic text-gray-500 mt-4">
+          Note: Include average monthly water use based on actual or estimated figures.
+        </p>
       </div>
     </div>
   );

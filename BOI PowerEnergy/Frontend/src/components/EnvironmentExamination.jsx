@@ -29,122 +29,114 @@ const EnvironmentExamination = () => {
     }
   };
 
-  if (!data) return <p className="p-4 text-gray-600">Loading...</p>;
+  if (!data) {
+    return (
+      <div className="flex justify-center py-20">
+        <p className="text-lg font-medium text-gray-500 animate-pulse">
+          Loading environmental data...
+        </p>
+      </div>
+    );
+  }
 
   return (
-    <div className="p-6 bg-white shadow-lg rounded-lg">
-      <h2 className="text-2xl font-semibold text-gray-800 mb-6">
-        5) Environment Examination
-      </h2>
+    <div className="container mx-auto px-4 py-10 text-gray-800">
+      <div className="bg-white rounded-xl shadow-md p-6 space-y-10 border border-gray-200">
+        <h2 className="text-2xl font-bold text-indigo-800 border-b pb-2">
+          5. Environmental Examination
+        </h2>
 
-      {/* 5.1 Waste Water */}
-      <h3 className="text-xl font-semibold text-gray-700 mb-3">5.1 Waste Water</h3>
-      <div className="overflow-x-auto mb-6">
-        <table className="min-w-full table-auto border-collapse text-sm">
-          <thead className="bg-gray-100 text-gray-700">
-            <tr>
-              <th className="border border-gray-300 px-4 py-2">Type</th>
-              <th className="border border-gray-300 px-4 py-2">Quantity (Ltrs/Day)</th>
-              <th className="border border-gray-300 px-4 py-2">Treatment</th>
-              <th className="border border-gray-300 px-4 py-2">Method for Disposal</th>
-            </tr>
-          </thead>
-          <tbody>
-            {data.wasteWaterList.map((item, index) => (
-              <tr key={index} className={`hover:bg-gray-50 ${index % 2 === 0 ? 'bg-gray-50' : 'bg-white'}`}>
-                <td className="border border-gray-300 px-4 py-2">{displayValue(item.wwsno)}</td>
-                <td className="border border-gray-300 px-4 py-2">{displayValue(item.wwVolume)}</td>
-                <td className="border border-gray-300 px-4 py-2">{displayValue(item.wwTreatment)}</td>
-                <td className="border border-gray-300 px-4 py-2">{displayValue(item.wwDisposalMode)}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+        {/* Utility Section Component for Tables */}
+        {[
+          {
+            title: '5.1 Waste Water',
+            dataList: data.wasteWaterList,
+            headers: ['Type', 'Quantity (Ltrs/Day)', 'Treatment', 'Method for Disposal'],
+            keys: ['wwsno', 'wwVolume', 'wwTreatment', 'wwDisposalMode'],
+          },
+          {
+            title: '5.2 (a) Solid Waste',
+            dataList: data.solidWasteList,
+            headers: ['Type', 'Nature', 'Kg/Day', 'Treatment', 'Disposal Method'],
+            keys: ['swsno', 'swNature', 'swqty', 'swTreatment', 'swDisMode'],
+          },
+          {
+            title: '5.3 Air Emissions',
+            dataList: data.airEmissionsDetails,
+            headers: ['Air Emission Envisaged', 'Methodology Proposed for Control'],
+            keys: ['aEenvisagedSQNO', 'aeMethodologyControl'],
+          },
+          {
+            title: '5.4 Sewage',
+            dataList: data.sewageList,
+            headers: ['Nature of Effluent', 'Treatment', 'Method of Disposal'],
+            keys: ['swNatureOfEffluent', 'swTreatment', 'swMethDisposal'],
+          },
+        ].map((section, idx) => (
+          <section key={idx}>
+            <h3 className="text-xl font-semibold text-gray-700 mb-4">
+              {section.title}
+            </h3>
+            <div className="overflow-x-auto">
+              <table className="min-w-full text-sm border border-gray-300 rounded-lg overflow-hidden shadow-sm">
+                <thead className="bg-gray-100 text-gray-700 uppercase text-xs">
+                  <tr>
+                    {section.headers.map((head, i) => (
+                      <th key={i} className="border px-4 py-2 font-medium">
+                        {head}
+                      </th>
+                    ))}
+                  </tr>
+                </thead>
+                <tbody>
+                  {section.dataList.map((item, rowIdx) => (
+                    <tr
+                      key={rowIdx}
+                      className={`${
+                        rowIdx % 2 === 0 ? 'bg-gray-50' : 'bg-white'
+                      } hover:bg-indigo-50`}
+                    >
+                      {section.keys.map((key, colIdx) => (
+                        <td key={colIdx} className="border px-4 py-2">
+                          {displayValue(item[key])}
+                        </td>
+                      ))}
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </section>
+        ))}
+
+        {/* 5.5 Noise / Vibration */}
+        <section>
+          <h3 className="text-xl font-semibold text-gray-700 mb-4">
+            5.5 Noise / Vibration
+          </h3>
+          {data.noiseList.map((section, idx) => (
+            <div
+              key={idx}
+              className="bg-indigo-50 border border-indigo-100 rounded-lg p-4 mb-6"
+            >
+              <h4 className="text-lg font-medium text-indigo-800 mb-2">
+                {section.noiseCode} – {getNoiseTitle(section.noiseCode)}
+              </h4>
+              <ol className="list-decimal list-inside space-y-1 text-gray-700 pl-4">
+                {section.niceDescription.map((item, i) => (
+                  <li key={i} className="ml-2">
+                    {displayValue(item.description)}
+                  </li>
+                ))}
+              </ol>
+            </div>
+          ))}
+        </section>
+
+        <p className="text-xs italic text-gray-500 pt-4">
+          Note: Please ensure all proposed mitigation strategies comply with environmental regulations and standards.
+        </p>
       </div>
-
-      {/* 5.2 Solid Waste */}
-      <h3 className="text-xl font-semibold text-gray-700 mb-3">5.2 (a) Solid Waste</h3>
-      <div className="overflow-x-auto mb-6">
-        <table className="min-w-full table-auto border-collapse text-sm">
-          <thead className="bg-gray-100 text-gray-700">
-            <tr>
-              <th className="border border-gray-300 px-4 py-2">Type</th>
-              <th className="border border-gray-300 px-4 py-2">Nature</th>
-              <th className="border border-gray-300 px-4 py-2">Kg. per day</th>
-              <th className="border border-gray-300 px-4 py-2">Treatment</th>
-              <th className="border border-gray-300 px-4 py-2">Method for Disposal</th>
-            </tr>
-          </thead>
-          <tbody>
-            {data.solidWasteList.map((item, index) => (
-              <tr key={index} className={`hover:bg-gray-50 ${index % 2 === 0 ? 'bg-gray-50' : 'bg-white'}`}>
-                <td className="border border-gray-300 px-4 py-2">{displayValue(item.swsno)}</td>
-                <td className="border border-gray-300 px-4 py-2">{displayValue(item.swNature)}</td>
-                <td className="border border-gray-300 px-4 py-2">{displayValue(item.swqty)}</td>
-                <td className="border border-gray-300 px-4 py-2">{displayValue(item.swTreatment)}</td>
-                <td className="border border-gray-300 px-4 py-2">{displayValue(item.swDisMode)}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-
-      {/* Air Emissions */}
-      <h3 className="text-xl font-semibold text-gray-700 mb-3">Air Emissions Envisaged</h3>
-      <div className="overflow-x-auto mb-6">
-        <table className="min-w-full table-auto border-collapse text-sm">
-          <thead className="bg-gray-100 text-gray-700">
-            <tr>
-              <th className="border border-gray-300 px-4 py-2">Air Emission Envisaged</th>
-              <th className="border border-gray-300 px-4 py-2">Methodology Proposed for Control</th>
-            </tr>
-          </thead>
-          <tbody>
-            {data.airEmissionsDetails.map((item, index) => (
-              <tr key={index} className={`hover:bg-gray-50 ${index % 2 === 0 ? 'bg-gray-50' : 'bg-white'}`}>
-                <td className="border border-gray-300 px-4 py-2">{displayValue(item.aEenvisagedSQNO)}</td>
-                <td className="border border-gray-300 px-4 py-2">{displayValue(item.aeMethodologyControl)}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-
-      {/* 5.4 Sewage */}
-      <h3 className="text-xl font-semibold text-gray-700 mb-3">5.4 Sewage</h3>
-      <div className="overflow-x-auto mb-6">
-        <table className="min-w-full table-auto border-collapse text-sm">
-          <thead className="bg-gray-100 text-gray-700">
-            <tr>
-              <th className="border border-gray-300 px-4 py-2">Nature of Effluent</th>
-              <th className="border border-gray-300 px-4 py-2">Treatment</th>
-              <th className="border border-gray-300 px-4 py-2">Method of Disposal</th>
-            </tr>
-          </thead>
-          <tbody>
-            {data.sewageList.map((item, index) => (
-              <tr key={index} className={`hover:bg-gray-50 ${index % 2 === 0 ? 'bg-gray-50' : 'bg-white'}`}>
-                <td className="border border-gray-300 px-4 py-2">{displayValue(item.swNatureOfEffluent)}</td>
-                <td className="border border-gray-300 px-4 py-2">{displayValue(item.swTreatment)}</td>
-                <td className="border border-gray-300 px-4 py-2">{displayValue(item.swMethDisposal)}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-
-      {/* 5.5 Noise/Vibration */}
-      <h3 className="text-xl font-semibold text-gray-700 mb-3">5.5 Noise/Vibration</h3>
-      {data.noiseList.map((section, sectionIndex) => (
-        <div key={sectionIndex} className="mb-6">
-          <h4 className="text-lg font-medium text-gray-800 mb-2">{section.noiseCode} {getNoiseTitle(section.noiseCode)}</h4>
-          <ol className="list-decimal list-inside space-y-1 text-gray-700">
-            {section.niceDescription.map((item, idx) => (
-              <li key={idx}>{displayValue(item.description)}</li>
-            ))}
-          </ol>
-        </div>
-      ))}
     </div>
   );
 };
