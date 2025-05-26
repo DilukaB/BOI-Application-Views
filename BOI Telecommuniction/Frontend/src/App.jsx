@@ -6,12 +6,14 @@ import ContactOfficer from "./components/ContactOfficer"
 import InvestorsDeclaration from "./components/InvestorsDeclaration"
 import ElectricityTable from "./components/ElectricityTable"
 import FuelConsumptions from "./components/FuelConsumptions"
+import LocationForm from "./components/LocationForm"
 
 function App() {
  
 
   return (
     <>
+    <LocationForm/>
        <FuelConsumptions/>
        <WaterConsumption/>
        <EnvironmentalExamination/>

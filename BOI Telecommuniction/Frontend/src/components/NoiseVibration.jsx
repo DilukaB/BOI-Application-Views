@@ -24,23 +24,25 @@ const NoiseVibration = () => {
   };
 
   return (
-    <div className="p-6 bg-white shadow-lg rounded-lg">
-      <h2 className="text-2xl font-semibold text-gray-800 mb-6">
-        5.5 Noise Vibration
-      </h2>
+    <div className="container mx-auto px-4 py-10 text-gray-800">
+      <div className="bg-white rounded-xl shadow-lg p-6 space-y-8">
+        <h2 className="text-2xl font-bold text-indigo-800 border-b pb-2">
+          5.5 Noise & Vibration
+        </h2>
 
-      {noiseData.map((item) => (
-        <div key={item.noiseCode} className="mb-6">
-          <h3 className="font-semibold text-gray-700 mb-2">
-            {getTitle(item.noiseCode)}
-          </h3>
-          <ol className="list-decimal pl-6 space-y-1 text-gray-800">
-            {item.niceDescription.map((desc, index) => (
-              <li key={index}>{desc.description}</li>
-            ))}
-          </ol>
-        </div>
-      ))}
+        {noiseData.map((item) => (
+          <div key={item.noiseCode} className="bg-gray-50 p-4 rounded-lg shadow-inner">
+            <h3 className="text-lg font-semibold text-gray-700 mb-2">
+              {getTitle(item.noiseCode)}
+            </h3>
+            <ol className="list-decimal pl-6 space-y-1 text-gray-800">
+              {item.niceDescription.map((desc, index) => (
+                <li key={index}>{desc.description || 'No Description'}</li>
+              ))}
+            </ol>
+          </div>
+        ))}
+      </div>
     </div>
   );
 };
