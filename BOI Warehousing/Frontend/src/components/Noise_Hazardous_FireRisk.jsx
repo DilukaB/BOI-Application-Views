@@ -20,7 +20,7 @@ const Noise_Hazardous_FireRisk = () => {
     <div className="container mx-auto px-4 py-10 text-gray-800">
       <div className="bg-white rounded-xl shadow-lg p-6">
         {/* Noise Section */}
-        <h2 className="text-2xl font-bold text-indigo-800 border-b border-indigo-300 pb-2 mb-6">
+        <h2 className="text-lg font-semibold mt-4 mb-1">
           3.4 Noise / Vibration
         </h2>
         <p className="mb-4 text-gray-700">
@@ -42,7 +42,7 @@ const Noise_Hazardous_FireRisk = () => {
         </ol>
 
         {/* Hazardous Materials Section */}
-        <h2 className="text-2xl font-bold text-indigo-800 border-b border-indigo-300 pb-2 mb-6">
+        <h2 className="text-lg font-semibold mt-4 mb-1">
           3.5 Hazardous Materials
         </h2>
         <p className="mb-4 text-gray-700">
@@ -62,7 +62,7 @@ const Noise_Hazardous_FireRisk = () => {
         </ol>
 
         {/* Fire Risk Section */}
-        <h2 className="text-2xl font-bold text-indigo-800 border-b border-indigo-300 pb-2 mb-6">
+        <h2 className="text-lg font-semibold mt-4 mb-1">
           3.6 Fire Risk
         </h2>
         <p className="mb-4 text-gray-700">
