@@ -20,7 +20,7 @@ const ElectricityTable = () => {
     <div className="container mx-auto px-4 py-10 text-gray-800">
       <div className="bg-white rounded-xl shadow-lg p-6 space-y-6">
         <h2 className="text-2xl font-bold text-indigo-800 border-b pb-2">
-          3) Electricity Requirements
+          6) Electricity Requirements
         </h2>
 
         <div className="overflow-x-auto">
