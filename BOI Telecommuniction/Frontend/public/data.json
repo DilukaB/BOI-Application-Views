@@ -1,6 +1,31 @@
 
  {
 
+
+     "applicationNo": "APP-001",
+  "siteAppCode": "SITE-001",
+  "investorID": "INV-001",
+  "siteLocations": [
+    {
+      "facadD1": "123 Main Street",
+      "facdistcd": "Colombo",
+      "ownership": "Private",
+      "facprvcd": "Western",
+      "lndacr": 1,
+      "lndrood": 2,
+      "lndpurch": 10
+    },
+    {
+      "facadD1": "456 Second Street",
+      "facdistcd": "Gampaha",
+      "ownership": "State",
+      "facprvcd": "Western",
+      "lndacr": 0,
+      "lndrood": 3,
+      "lndpurch": 20
+    }
+  ],
+
      "fuelConsumptions": [
     {
       "eqpcd": "Electricity / Generator",
